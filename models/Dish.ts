@@ -1,9 +1,11 @@
 import { Schema, model, Document,Types,Model } from 'mongoose';
+import IModel from './IModel';
 import {IRestaurant} from './Restaurant';
 
 
-interface IDish extends Document {
-    name: string;
+interface IDish extends IModel{
+    // _id?:string;
+    // name: string;
     price: number;
     ingredients?: string[];
     tags?: string[];
@@ -12,6 +14,7 @@ interface IDish extends Document {
   
 
 const dishSchema = new Schema<IDish>({
+   
   name: {
     type: String,
     required: true,
@@ -35,4 +38,4 @@ const dishSchema = new Schema<IDish>({
 
 const Dish = model<IDish>('Dish', dishSchema);
 
-export default Dish;
+export {IDish,Dish};

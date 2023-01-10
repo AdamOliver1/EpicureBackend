@@ -1,32 +1,40 @@
-import {  Model } from 'mongoose';
-import { IWrite } from '../Interfaces/IWrite';
-import { IRead } from '../Interfaces/IRead';
+import { Model } from "mongoose";
+import { IRepository } from "../Interfaces/IRepository";
+import { Document } from "mongoose";
+export abstract class BaseRepository<T> implements IRepository<T> {
+  model: Model<T>;
+  constructor(model: Model<T>) {
+    this.model = model;
+  }
 
+  async create(item: T): Promise<T> {
+    const newItem = this.model.create({ ...item });
+    return newItem;
+  }
 
-export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
+  async update(id: string, item: T): Promise<T | null>{
+// throw new Error();
+console.log("item:",item);
 
-    model:Document;
-    constructor(model:Model<Document>) {
-      
-        
-    }
-    create(item: T): Promise<boolean> {
-        throw new Error();
-    }
+   const updatedModel = await this.model.updateOne({_id:id},{item});
+    // const first = this.model.findById(id);
+   console.log("updatedModel");
+   console.log(updatedModel);
+   
+   return this.model.findById(id);
+  }
 
-    update(id: string, item: T): Promise<boolean> {
-        throw new Error();
-    }
+  async delete(id: string): Promise<any> {
+    const res = await this.model.remove({ _id: id });
+    return res;
+  }
 
-    delete(id: string): Promise<boolean> {
-        throw new Error();
-    }
+  async find(item?: T, populate?: string): Promise<T[]> {
+    return await this.model.find({item}).populate(populate || []);
+  }
 
-    find(item: T): Promise<T[]> {
-        throw new Error();
-    }
-
-    findOne(id: string): Promise<T> {
-        throw new Error();
+  async findOne(id: string): Promise<T | null> {
+      const item = await this.model.findById({_id:id});
+     return item;
     }
 }

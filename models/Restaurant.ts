@@ -1,14 +1,18 @@
 import { Schema, model,Types ,Document} from 'mongoose';
 import {IChef} from './Chef';
+import { IDish } from './Dish';
+import IModel from './IModel';
 
-interface IRestaurant extends Document {
-    name: string;
+interface IRestaurant extends IModel{
+    // _id?:string;
+    // name: string;
     image?: string;
     chef: IChef;
-    dishes?: string[];
+    //  dishes: IDish[];
   }
 
 const restaurantSchema = new Schema<IRestaurant>({
+   
   name: {
     type: String,
     required: true, 
@@ -21,10 +25,10 @@ const restaurantSchema = new Schema<IRestaurant>({
     ref: 'Chef',
     required: true,
   },
-  dishes: [{
-    type: Types.ObjectId,
-    ref: 'Dish',
-  }],
+//   dishes: [{
+//     type: Types.ObjectId,
+//     ref: 'Dish',
+//   }],
 });
 
 const Restaurant = model<IRestaurant>('Restaurant', restaurantSchema);
