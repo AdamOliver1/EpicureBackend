@@ -1,28 +1,17 @@
 import { ChefRepository } from "../repositories/ChefRepository";
 import { RestaurantRepository } from "../repositories/RestaurantRepository";
 import { DishRepository } from "../repositories/DishRepository";
-import { Chef } from "../models/Chef";
+
 export const initData = async () => {
   const chefRepository = new ChefRepository();
   const restaurantRepository = new RestaurantRepository();
   const dishRepository = new DishRepository();
+  
+  const chefs = await chefRepository.getAll();
+  const restaurant = await restaurantRepository.getAll();
+  const dishes = await dishRepository.getAll();
+  
 
-  const chefs = await chefRepository.find();
-  const restaurant = await restaurantRepository.find();
-  const dishes = await dishRepository.find();
-
-  const before = restaurantRepository.findOne("63bd757c7b92f49837fbf2ae");
-before.then(item => {
-  if(item){
-    item.name = "adam oliver";
-    const res =restaurantRepository.update("63bd757c7b92f49837fbf2ae",item);
-res.then((data) => {
-console.log("update");
-console.log(data);
-
-})
-  }
-})
   if (chefs.length == 0 && restaurant.length == 0 && dishes.length == 0) {
     const chef1 = await chefRepository.create({
       name: "Chef John",

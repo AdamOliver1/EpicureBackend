@@ -1,26 +1,31 @@
-// import { IHandler } from './interfaces/IHandler';
-// import { RestaurantRepository } from './../repositories/RestaurantRepository';
-// import { IRestaurant } from "../models/Restaurant";
-// import { IRepository } from "../repositories/Interfaces/IRepository";
-// import IModel from '../models/IModel';
+import { IModelRepository } from "../repositories/Interfaces/ModelsRepositories";
+import { IHandler } from "./interfaces/IHandler";
+import { IChefRepository } from "../repositories/Interfaces/ModelsRepositories";
+import IModel from "../models/IModel";
+import { IChef } from "../models/Chef";
+import { IChefHandler } from "./interfaces/modelsInterfaces";
 
+export class BaseHandler implements IHandler {
+  repo: IModelRepository;
 
+  constructor(repository: IModelRepository) {
+    this.repo = repository;
+  }
 
-// export abstract class BaseHandler<T> implements IHandler{
- 
-//     repo: IRepository<T>;
+  delete(id: string): void {
+    this.repo.delete(id);
+  }
 
-//     constructor(repository:IRepository<T>) {
-//       this.repo = repository;
-//     }
-//    async create(item: IModel):Promise<T>{
-//         return await this.repo.create(item);
-//     }
+  async getAll(): Promise<IModel[]> {
+    return await this.repo.getAll();
+  }
 
-//     // create(restaurant: IRestaurant) :IModel{
-//     //     console.log("handleeeeeee");
-        
-//     //   return this.repo.create(restaurant);
-//     // }
+  // can be overidded
+  async update(id: string, item: IModel): Promise<IModel | null> {
+    return await this.repo.update(id, item);
+  }
 
-// }
+  async create(restaurant: IModel): Promise<IModel> {
+    return await this.repo.create(restaurant);
+  }
+}

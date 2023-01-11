@@ -17,6 +17,20 @@ export abstract class BaseController {
   };
 
   update = async (req: Request, res: Response) => {
-   const item =  await this.handler.update(req.body.id,req.body.item);
+    console.log(req.params);
+    console.log(req.body);
+    
+    const item = await this.handler.update(req.params.id, req.body);
+    res.send(item);
+  };
+
+  getAll = async (req: Request, res: Response) => {
+    const items = await this.handler.getAll();
+    res.send(items);
+  };
+
+  delete = async (req: Request, res: Response) => {
+    await this.handler.delete(req.params.id);
+    res.send();
   };
 }

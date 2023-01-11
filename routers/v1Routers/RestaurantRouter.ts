@@ -9,7 +9,9 @@ const controller = new RestaurantController(
   new RestaurantHandler(new RestaurantRepository())
 );
 
-RestaurantRouter.post("/create", controller.create);
-RestaurantRouter.post("/update", controller.update);
+RestaurantRouter.get("/restaurant", controller.getAll);
+RestaurantRouter.put("/restaurant/:id", controller.update);
+RestaurantRouter.post("/restaurant", controller.create);
+RestaurantRouter.delete("/restaurant/:id", controller.delete);
 
 export { RestaurantRouter };

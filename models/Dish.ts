@@ -4,8 +4,6 @@ import {IRestaurant} from './Restaurant';
 
 
 interface IDish extends IModel{
-    // _id?:string;
-    // name: string;
     price: number;
     ingredients?: string[];
     tags?: string[];
