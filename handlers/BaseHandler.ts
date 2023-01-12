@@ -1,31 +1,33 @@
-import { IModelRepository } from "../repositories/Interfaces/ModelsRepositories";
 import { IHandler } from "./interfaces/IHandler";
-import { IChefRepository } from "../repositories/Interfaces/ModelsRepositories";
 import IModel from "../models/IModel";
-import { IChef } from "../models/Chef";
-import { IChefHandler } from "./interfaces/modelsInterfaces";
+import { injectable } from "inversify";
 
-export class BaseHandler implements IHandler {
-  repo: IModelRepository;
+@injectable()
+export abstract class BaseHandler implements IHandler {
+  protected abstract repository: any;
 
-  constructor(repository: IModelRepository) {
-    this.repo = repository;
+  constructor() {}
+
+  abstract deletePermanently(id: string): Promise<any>;
+
+  async disable(id: string): Promise<any> {
+    return await this.repository.Disable(id);
   }
 
-  delete(id: string): void {
-    this.repo.delete(id);
-  }
-
-  async getAll(): Promise<IModel[]> {
-    return await this.repo.getAll();
+  async getAll(populate?: string): Promise<IModel[]> {
+    return await this.repository.getAll(populate);
   }
 
   // can be overidded
   async update(id: string, item: IModel): Promise<IModel | null> {
-    return await this.repo.update(id, item);
+    return await this.repository.update(id, item);
   }
 
   async create(restaurant: IModel): Promise<IModel> {
-    return await this.repo.create(restaurant);
+    return await this.repository.create(restaurant);
+  }
+
+  async filterByName(name: string, populate?: string): Promise<IModel[]> {
+    return await this.repository.filterByName(name, populate);
   }
 }

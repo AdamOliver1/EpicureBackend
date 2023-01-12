@@ -9,9 +9,12 @@ const controller = new RestaurantController(
   new RestaurantHandler(new RestaurantRepository())
 );
 
-RestaurantRouter.get("/restaurant", controller.getAll);
-RestaurantRouter.put("/restaurant/:id", controller.update);
-RestaurantRouter.post("/restaurant", controller.create);
-RestaurantRouter.delete("/restaurant/:id", controller.delete);
+// const controller = new RestaurantController();
+
+RestaurantRouter.get("/", controller.getAll);
+RestaurantRouter.put("/:id", controller.update);
+RestaurantRouter.put("/disable/:id", controller.Disable);
+RestaurantRouter.post("/", controller.create);
+RestaurantRouter.delete("/:id", controller.deletePermanently);
 
 export { RestaurantRouter };

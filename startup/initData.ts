@@ -1,8 +1,10 @@
+import { Status } from './../models/status';
 import { ChefRepository } from "../repositories/ChefRepository";
 import { RestaurantRepository } from "../repositories/RestaurantRepository";
 import { DishRepository } from "../repositories/DishRepository";
 
 export const initData = async () => {
+  return null;
   const chefRepository = new ChefRepository();
   const restaurantRepository = new RestaurantRepository();
   const dishRepository = new DishRepository();

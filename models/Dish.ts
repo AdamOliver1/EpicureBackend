@@ -1,18 +1,17 @@
-import { Schema, model, Document,Types,Model } from 'mongoose';
-import IModel from './IModel';
-import {IRestaurant} from './Restaurant';
+import { Status } from "./status";
+import { Schema, model, Document, Types, Model } from "mongoose";
+import IModel from "./IModel";
+import { IRestaurant } from "./Restaurant";
+import { findExists } from "../helpers/findNotDeleted";
 
-
-interface IDish extends IModel{
-    price: number;
-    ingredients?: string[];
-    tags?: string[];
-    restaurant: IRestaurant; 
-  }
-  
+interface IDish extends IModel {
+  price: number;
+  ingredients?: string[];
+  tags?: string[];
+  restaurant: IRestaurant;
+}
 
 const dishSchema = new Schema<IDish>({
-   
   name: {
     type: String,
     required: true,
@@ -29,11 +28,18 @@ const dishSchema = new Schema<IDish>({
   },
   restaurant: {
     type: Types.ObjectId,
-    ref: 'Restaurant',
+    ref: "Restaurant",
     required: true,
+  },
+  status: {
+    type: String,
+    enum: Object.values(Status),
+    default: Status.EXISTS,
   },
 });
 
-const Dish = model<IDish>('Dish', dishSchema);
 
-export {IDish,Dish};
+
+const Dish = model<IDish>("Dish", dishSchema);
+
+export { IDish, Dish };
