@@ -1,11 +1,16 @@
-import{ Request, Response, Router } from "express";
+import{ NextFunction, Request, Response, Router } from "express";
 
-export const handleErrors =(req: Request, res: Response) => {
-    throw new Error('This is an error');
-  
-    res.json({ status: 'ok' });
-  }
-
+export const errorHandler = (
+   error: Error,
+   req: Request,
+   res: Response,
+   next: NextFunction
+ ) => {
+    console.log("erorrrrrrrrrrrrr");
+   console.error(error);
+   
+   res.status(500).json({ message: error.message });
+ };
 
 process.on('uncaughtException', (ex) => {
    console.log("uncaughtException");

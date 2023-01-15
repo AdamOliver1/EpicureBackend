@@ -1,4 +1,5 @@
-import { Status } from "./status";
+import { Status } from "../../models/status";
+
 type IModel = {
   _id?: string;
   name: string;

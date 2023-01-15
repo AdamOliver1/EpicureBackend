@@ -1,10 +1,12 @@
-import { injectable } from 'inversify';
+import { IHandler } from "./../handlers/interfaces/IHandler";
+import { injectable } from "inversify";
 import express, { Request, Response, Router } from "express";
+import IModel from "../db/dbModels/IModel";
 
 @injectable()
-export default abstract class BaseController{
+export default abstract class BaseController {
   //TODO change any to types | | |
-  protected abstract handler: any;
+  protected abstract handler: IHandler<IModel>;
   router: Router;
 
   constructor() {
@@ -49,12 +51,10 @@ export default abstract class BaseController{
 
   deletePermanently = async (req: Request, res: Response) => {
     try {
-        await this.handler.deletePermanently(req.params.id);
-        res.send();
-
-      } catch (err: any) {
-        console.log(err);
-      }
-
+      await this.handler.deletePermanently(req.params.id);
+      res.send();
+    } catch (err: any) {
+      console.log(err);
+    }
   };
 }

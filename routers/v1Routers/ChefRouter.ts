@@ -1,12 +1,10 @@
-import { ChefRepository } from "./../../repositories/ChefRepository";
+import { ChefRepository } from "../../db/repositories/ChefRepository";
 import { ChefHandler } from "./../../handlers/ChefHandler";
 import { ChefController } from "./../../controllers/ChefController";
 import express from "express";
-import { container, TYPES } from "../../factory/inversify.config";
-
+import TYPES from "../../factory/types";
+import { container } from "../../factory/inversify.config";
 const ChefRouter = express.Router();
-// const controller = new ChefController(new ChefHandler(new ChefRepository()));
-console.log("dffsddssdfs");
 
 const controller = container.get<ChefController>(TYPES.ChefController);
 
@@ -17,4 +15,3 @@ ChefRouter.post("/", controller.create);
 ChefRouter.delete("/:id", controller.deletePermanently);
 
 export { ChefRouter };
- 

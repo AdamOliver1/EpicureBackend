@@ -5,14 +5,11 @@ import BaseController from "./BaseController";
 
 @injectable()
 export class ChefController extends BaseController {
-  handler: IChefHandler;
-  // handler: IChefHandler = container.get<IChefHandler>(TYPES.IChefHandler);
-  constructor(@inject(TYPES.IChefHandler) protected readonly chefHandler: IChefHandler) // @inject(TYPES.IChefHandler) protected readonly chefHandler: IChefHandler
-  {
+ 
+  constructor(
+    @inject(TYPES.IChefHandler) protected readonly handler: IChefHandler 
+  ) {
     super();
-console.log("ChefController");
-
-    // this.handler = container.get<IChefHandler>(TYPES.IChefHandler);
-    this.handler = chefHandler;
+    
   }
 }

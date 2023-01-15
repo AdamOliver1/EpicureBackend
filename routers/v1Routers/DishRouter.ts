@@ -1,12 +1,14 @@
-import { DishRepository } from "./../../repositories/DishRepository";
+import { DishRepository } from "../../db/repositories/DishRepository";
 import { DishHandler } from "./../../handlers/DishHandler";
 import { DishController } from "./../../controllers/DishController";
 import express from "express";
+import TYPES from "../../factory/types";
+import { container } from "../../factory/inversify.config";
 
 const DishRouter = express.Router();
 
-const controller = new DishController(new DishHandler(new DishRepository()));
-// const controller = new DishController();
+// const controller = new DishController(new DishHandler(new DishRepository()));
+const controller = container.get<DishController>(TYPES.DishController);
 
 DishRouter.get("/", controller.getAll);
 DishRouter.put("/:id", controller.update);

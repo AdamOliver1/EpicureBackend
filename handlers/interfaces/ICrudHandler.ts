@@ -1,8 +1,8 @@
-import IModel from "../../models/IModel";
+import IModel from "../../db/dbModels/IModel";
 
-export interface ICrudHandler {
-  create(restaurant: IModel): Promise<IModel>;
-  update(id: string, item: IModel): Promise<IModel | null>;
+export interface ICrudHandler<T extends IModel> {
+  create(restaurant: T): Promise<T>;
+  update(id: string, item: T): Promise<T | null>;
   deletePermanently(id: string): Promise<any>;
-  getAll(populate?: string): Promise<IModel[]>;
+  getAll(): Promise<T[]>;
 }

@@ -1,18 +1,17 @@
-import { Status } from './../models/status';
-import { ChefRepository } from "../repositories/ChefRepository";
-import { RestaurantRepository } from "../repositories/RestaurantRepository";
-import { DishRepository } from "../repositories/DishRepository";
+import { Status } from "./../models/status";
+import { ChefRepository } from "../db/repositories/ChefRepository";
+import { RestaurantRepository } from "../db/repositories/RestaurantRepository";
+import { DishRepository } from "../db/repositories/DishRepository";
 
 export const initData = async () => {
   return null;
   const chefRepository = new ChefRepository();
   const restaurantRepository = new RestaurantRepository();
   const dishRepository = new DishRepository();
-  
-  const chefs = await chefRepository.getAll();
-  const restaurant = await restaurantRepository.getAll();
-  const dishes = await dishRepository.getAll();
-  
+
+  const chefs = await chefRepository.getAllExists();
+  const restaurant = await restaurantRepository.getAllExists();
+  const dishes = await dishRepository.getAllExists();
 
   if (chefs.length == 0 && restaurant.length == 0 && dishes.length == 0) {
     const chef1 = await chefRepository.create({

@@ -1,15 +1,19 @@
 import { RestaurantHandler } from "../../handlers/RestaurantHandler";
 import express, { Request, Response, Application } from "express";
 import { RestaurantController } from "../../controllers/RestaurantController";
-import { RestaurantRepository } from "../../repositories/RestaurantRepository";
+import { RestaurantRepository } from "../../db/repositories/RestaurantRepository";
+import { container } from "../../factory/inversify.config";
+import { DishController } from "../../controllers/DishController";
+import TYPES from "../../factory/types";
 
 const RestaurantRouter = express.Router();
 
-const controller = new RestaurantController(
-  new RestaurantHandler(new RestaurantRepository())
+// const controller = new RestaurantController(
+//   new RestaurantHandler(new RestaurantRepository())
+// );
+const controller = container.get<RestaurantController>(
+  TYPES.RestaurantController
 );
-
-// const controller = new RestaurantController();
 
 RestaurantRouter.get("/", controller.getAll);
 RestaurantRouter.put("/:id", controller.update);

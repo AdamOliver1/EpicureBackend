@@ -1,8 +1,14 @@
+import IChef from "../../models/Chef";
+import IDish from "../../models/Dish";
+import IRestaurant from "../../models/Restaurant";
 import { IHandler } from "./IHandler";
 
-export interface IChefHandler extends IHandler{
-    
+export interface IChefHandler extends IHandler<IChef> {
+    filterAllStrings(text: string): Promise<IChef[]>
 }
-export interface IDishHandler extends IHandler{
+
+export interface IDishHandler extends IHandler<IDish> {
+    filterAllStrings(text: string): Promise<IDish[]> ;
 }
-export interface IRestaurantHandler extends IHandler {}
+
+export interface IRestaurantHandler extends IHandler<IRestaurant> {}

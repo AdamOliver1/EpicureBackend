@@ -1,4 +1,6 @@
-import express, { Request, Response, Application } from "express";
+// import { CommonRepository } from './../../repositories/commonRepository';
+import express from "express";
+import { errorHandler } from "../../middlewares/error";
 import { ChefRouter } from "./ChefRouter";
 import { DishRouter } from "./DishRouter";
 import FilterRouter from "./FilterRouter";
@@ -9,8 +11,8 @@ v1Router.use('/restaurant',RestaurantRouter)
 v1Router.use('/chef',ChefRouter)
 v1Router.use('/dish',DishRouter)
 v1Router.use('/filter',FilterRouter)
+v1Router.use(errorHandler);
 
-
-export{
+export {
     v1Router
 }

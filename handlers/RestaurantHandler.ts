@@ -1,23 +1,24 @@
-import { IRestaurantRepository } from "../repositories/Interfaces/ModelsRepositories";
-import { IRestaurant } from "../models/Restaurant";
-import IModel from "../models/IModel";
+import { IRestaurantRepository } from "../db/Interfaces/ModelsRepositories";
 import { IRestaurantHandler } from "./interfaces/modelsInterfaces";
 import { BaseHandler } from "./BaseHandler";
 import { inject, injectable } from "inversify";
-import { TYPES } from "../factory/inversify.config";
+import TYPES from "../factory/types";
+import IRestaurant from "../models/Restaurant";
 
 @injectable()
 export class RestaurantHandler
-  extends BaseHandler
+  extends BaseHandler<IRestaurant>
   implements IRestaurantHandler
 {
   // @inject(TYPES.IRestaurantRepository)
-  protected repository: IRestaurantRepository;
+  // protected repository: IRestaurantRepository;
 
-  constructor( protected readonly restaurantRepository: IRestaurantRepository) // @inject(TYPES.IRestaurantRepository)
-  {
+  constructor(
+    @inject(TYPES.IRestaurantRepository)
+    protected readonly repository: IRestaurantRepository
+  ) {
     super();
-    this.repository = restaurantRepository;
+    // this.repository = restaurantRepository;
   }
 
   deletePermanently(id: string): Promise<any> {
