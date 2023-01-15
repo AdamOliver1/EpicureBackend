@@ -1,6 +1,7 @@
 import { Status } from "../../models/status";
 import { Schema, model, Types } from "mongoose";
 import IDish from "../../models/Dish";
+import { Tags } from "../../models/Tags";
 
 
 const dishSchema = new Schema<IDish>({
@@ -13,10 +14,10 @@ const dishSchema = new Schema<IDish>({
     required: true,
   },
   ingredients: {
-    type: [String],
+    type: [String]
   },
   tags: {
-    type: [String],
+    type: [String],enum:Object.values(Tags)
   },
   restaurant: {
     type: Types.ObjectId,
@@ -27,8 +28,10 @@ const dishSchema = new Schema<IDish>({
     type: String,
     enum: Object.values(Status),
     default: Status.EXISTS,
+    select:false
   },
-});
+
+},{ versionKey: false });
 
 const Dish = model<IDish>("Dish", dishSchema);
 

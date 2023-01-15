@@ -18,9 +18,10 @@ const chefSchema = new Schema<IChef>({
     type: String,
     enum: Object.values(Status),
     default: Status.EXISTS,
+    select:false
   },
-});
 
+},{ versionKey: false });
 const Chef = model<IChef>("Chef", chefSchema);
 
 export { Chef };

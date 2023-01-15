@@ -2,7 +2,7 @@ import { injectable, unmanaged } from "inversify";
 import { Model, PipelineStage } from "mongoose";
 import { IRepository } from "../../Interfaces/IRepository";
 import { Status } from "../../../models/status";
-import IModel from "../../dbModels/IModel";
+import IModel from "../../../models/IModel";
 import { disabled, exists } from "../../helpers/filters";
 
 @injectable()

@@ -1,4 +1,4 @@
-import IModel from "../../db/dbModels/IModel";
+import IModel from "../../models/IModel";
 
 export interface ICrudHandler<T extends IModel> {
   create(restaurant: T): Promise<T>;

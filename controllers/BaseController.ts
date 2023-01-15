@@ -1,7 +1,7 @@
 import { IHandler } from "./../handlers/interfaces/IHandler";
 import { injectable } from "inversify";
 import express, { Request, Response, Router } from "express";
-import IModel from "../db/dbModels/IModel";
+import IModel from "../models/IModel";
 
 @injectable()
 export default abstract class BaseController {
@@ -41,8 +41,8 @@ export default abstract class BaseController {
 
   getById = async (req: Request, res: Response) => {
     try {
-      const {id} = req.params;
-      if(id === undefined) throw new Error("Must deliver an id");
+      const { id } = req.params;
+      if (id === undefined) throw new Error("Must deliver an id");
       const item = await this.handler.findById(id);
       res.send(item);
     } catch (err: any) {

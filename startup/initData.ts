@@ -2,9 +2,10 @@ import { Status } from "./../models/status";
 import { ChefRepository } from "../db/repositories/ChefRepository";
 import { RestaurantRepository } from "../db/repositories/RestaurantRepository";
 import { DishRepository } from "../db/repositories/DishRepository";
+import { Tags } from "../models/Tags";
 
 export const initData = async () => {
-  return null;
+  // return null;
   const chefRepository = new ChefRepository();
   const restaurantRepository = new RestaurantRepository();
   const dishRepository = new DishRepository();
@@ -36,26 +37,31 @@ export const initData = async () => {
     const restaurant1 = await restaurantRepository.create({
       name: "John's Kitchen",
       image: "imageUrl1",
+      stars:2,
       chef: chef1,
     });
     const restaurant2 = await restaurantRepository.create({
       name: "Michael's Restaurant",
       image: "imageUrl2",
+      stars:4,
       chef: chef2,
     });
     const restaurant3 = await restaurantRepository.create({
       name: "Sarah's Cafe",
       image: "imageUrl3",
+      stars:5,
       chef: chef3,
     });
     const restaurant4 = await restaurantRepository.create({
       name: "John's Bistro",
       image: "imageUrl4",
+      stars:5,
       chef: chef2,
     });
     const restaurant5 = await restaurantRepository.create({
       name: "Michael's Diner",
       image: "imageUrl5",
+      stars:4,
       chef: chef1,
     });
 
@@ -63,35 +69,35 @@ export const initData = async () => {
       name: "John's Special",
       price: 20,
       ingredients: ["chicken", "tomatoes", "onions"],
-      tags: ["spicy", "hot"],
+      tags: [Tags.SPICY, Tags.VEGAN],
       restaurant: restaurant1,
     });
     const dish2 = await dishRepository.create({
       name: "Michael's Delight",
       price: 25,
       ingredients: ["beef", "potatoes", "carrots"],
-      tags: ["savory", "delicious"],
+      tags: [],
       restaurant: restaurant2,
     });
     const dish3 = await dishRepository.create({
       name: "Sarah's Surprise",
       price: 30,
       ingredients: ["shrimp", "zucchini", "mushrooms"],
-      tags: ["light", "flavorful"],
+      tags: [Tags.SPICY],
       restaurant: restaurant3,
     });
     const dish4 = await dishRepository.create({
       name: "John's Favorite",
       price: 18,
       ingredients: ["pork", "eggplant", "peppers"],
-      tags: ["hearty", "satisfying"],
+      tags: [Tags.VEGETARIAN],
       restaurant: restaurant4,
     });
     const dish5 = await dishRepository.create({
       name: "Michael's Creation",
       price: 22,
       ingredients: ["salmon", "spinach", "onions"],
-      tags: ["healthy", "tasty"],
+      tags: [Tags.VEGETARIAN],
       restaurant: restaurant5,
     });
 
@@ -99,35 +105,35 @@ export const initData = async () => {
       name: "John's Specialty",
       price: 24,
       ingredients: ["lamb", "squash", "tomatoes"],
-      tags: ["juicy", "aromatic"],
+      tags: [Tags.VEGETARIAN],
       restaurant: restaurant4,
     });
     const dish8 = await dishRepository.create({
       name: "Michael's Masterpiece",
       price: 32,
       ingredients: ["scallops", "leeks", "asparagus"],
-      tags: ["elegant", "luxurious"],
+      tags: [],
       restaurant: restaurant2,
     });
     const dish9 = await dishRepository.create({
       name: "Sarah's Sensation",
       price: 26,
       ingredients: ["mussels", "cauliflower", "potatoes"],
-      tags: ["rustic", "comforting"],
+      tags: [],
       restaurant: restaurant1,
     });
     const dish10 = await dishRepository.create({
       name: "John's Delicacy",
       price: 22,
       ingredients: ["clams", "cabbage", "onions"],
-      tags: ["fresh", "briny"],
+      tags: [Tags.SPICY],
       restaurant: restaurant1,
     });
     const dish11 = await dishRepository.create({
       name: "Michael's Classic",
       price: 30,
       ingredients: ["oysters", "radicchio", "fennel"],
-      tags: ["refined", "exquisite"],
+      tags: [Tags.SPICY],
       restaurant: restaurant1,
     });
   }

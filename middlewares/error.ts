@@ -12,12 +12,12 @@ export const errorHandler = (
    res.status(500).json({ message: error.message });
  };
 
-process.on('uncaughtException', (ex) => {
-   console.log("uncaughtException");
+// process.on('uncaughtException', (ex) => {
+//    console.log("uncaughtException");
    
-})
+// })
 
-process.on('unhandledRejection', (ex) => {
-   console.log("unhandledRejection");
+// process.on('unhandledRejection', (ex) => {
+//    console.log("unhandledRejection");
    
-})
+// })

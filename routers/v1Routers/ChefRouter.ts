@@ -1,5 +1,3 @@
-import { ChefRepository } from "../../db/repositories/ChefRepository";
-import { ChefHandler } from "./../../handlers/ChefHandler";
 import { ChefController } from "./../../controllers/ChefController";
 import express from "express";
 import TYPES from "../../factory/types";
