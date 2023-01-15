@@ -17,7 +17,7 @@ export class DishRepository extends BaseRepository<IDish> implements IDishReposi
    if (res.length > 1) throw new Error("ID must be unique!");
    return res;
   }
-
+// hhh
   async getAllExists(): Promise<IDish[]> {
     return await this.model.aggregate([
       { $match:exists() },
