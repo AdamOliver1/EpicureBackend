@@ -7,18 +7,11 @@ import IChef from "../models/Chef";
 
 @injectable()
 export class ChefHandler extends BaseHandler<IChef> implements IChefHandler {
-  repository: IChefRepository;
-  // @inject(TYPES.IChefRepository) protected repository: IChefRepository;
   constructor(
-    // @inject(TYPES.IChefRepository)
     @inject(TYPES.IChefRepository)
-    protected readonly chefRepository: IChefRepository
+    protected readonly repository: IChefRepository
   ) {
     super();
-    this.repository = chefRepository;
-  }
-  stam() {
-    console.log("stam");
   }
 
   async deletePermanently(id: string): Promise<any> {

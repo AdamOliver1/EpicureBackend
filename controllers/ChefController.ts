@@ -10,6 +10,5 @@ export class ChefController extends BaseController {
     @inject(TYPES.IChefHandler) protected readonly handler: IChefHandler 
   ) {
     super();
-    
   }
 }

@@ -1,3 +1,4 @@
+import { errorHandler } from './middlewares/error';
 import 'reflect-metadata';
 import express, {Request,Response,Application} from 'express';
 import {connectToDb} from './startup/db';
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 initData();
 app.use(appRouter);
+app.use(errorHandler)
 connectToDb();
 app.listen( process.env.PORT || 8000, ():void => {
     console.log(`Server Running here`);

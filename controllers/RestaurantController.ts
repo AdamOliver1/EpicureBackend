@@ -5,13 +5,11 @@ import BaseController from "./BaseController";
 
 @injectable()
 export class RestaurantController extends BaseController {
-  // handler: IRestaurantHandler; // = container.get<IRestaurantHandler>(
-  //   TYPES.IRestaurantHandler
-  // );
+  
   constructor(
-    @inject(TYPES.IRestaurantHandler) protected readonly handler: IRestaurantHandler // @inject(TYPES.IRestaurantHandler) // protected readonly restaurantHandler: IRestaurantHandler
+    @inject(TYPES.IRestaurantHandler)
+    protected readonly handler: IRestaurantHandler
   ) {
     super();
-    // this.handler = restaurantHandler;
   }
 }

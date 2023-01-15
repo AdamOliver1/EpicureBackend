@@ -1,4 +1,3 @@
-// import { CommonRepository } from './../../repositories/commonRepository';
 import express from "express";
 import { errorHandler } from "../../middlewares/error";
 import { ChefRouter } from "./ChefRouter";
@@ -11,7 +10,7 @@ v1Router.use('/restaurant',RestaurantRouter)
 v1Router.use('/chef',ChefRouter)
 v1Router.use('/dish',DishRouter)
 v1Router.use('/filter',FilterRouter)
-v1Router.use(errorHandler);
+v1Router.use("*",errorHandler);
 
 export {
     v1Router

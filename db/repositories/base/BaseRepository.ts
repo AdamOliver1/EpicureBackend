@@ -3,6 +3,7 @@ import { Model, PipelineStage } from "mongoose";
 import { IRepository } from "../../Interfaces/IRepository";
 import { Status } from "../../../models/status";
 import IModel from "../../dbModels/IModel";
+import { disabled, exists } from "../../helpers/filters";
 
 @injectable()
 export default abstract class BaseRepository<T extends IModel>
@@ -13,6 +14,8 @@ export default abstract class BaseRepository<T extends IModel>
   constructor(@unmanaged() model: Model<T>) {
     this.model = model;
   }
+  abstract filterByName(name: string, populate?: string): Promise<T[]>;
+  abstract findById(id: string): Promise<T[]>;
 
   async create(item: T): Promise<T> {
     const newItem = this.model.create({ ...item });
@@ -26,10 +29,7 @@ export default abstract class BaseRepository<T extends IModel>
   }
 
   async Disable(id: string): Promise<any> {
-    return await this.model.updateOne(
-      { _id: id },
-      { $set: { status: Status.DISABLED } }
-    );
+    return await this.model.updateOne({ _id: id }, { $set: disabled() });
   }
 
   async deletePermanently(id: string): Promise<any> {
@@ -37,24 +37,18 @@ export default abstract class BaseRepository<T extends IModel>
   }
 
   async getAllExists(): Promise<T[]> {
-    return await this.model.aggregate([{ $match:{ status: Status.EXISTS}}]);
+    return await this.model.aggregate([{ $match: exists() }]);
   }
 
-  abstract filterByName(name: string, populate?: string): Promise<T[]>;
-
-  protected async filterByText(matchOptions: PipelineStage[]): Promise<T[]> {
+  protected async filterMultipleOptions(
+    matchOptions: PipelineStage[]
+  ): Promise<T[]> {
     return this.model.aggregate([
       {
         $match: {
-          $and: [
-            {
-              $or: matchOptions,
-            },
-            { status: Status.EXISTS },
-          ],
+          $and: [{ $or: matchOptions }, exists()],
         },
       },
     ]);
   }
-
 }

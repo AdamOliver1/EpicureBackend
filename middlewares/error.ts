@@ -1,4 +1,4 @@
-import{ NextFunction, Request, Response, Router } from "express";
+import{ NextFunction, Request, Response } from "express";
 
 export const errorHandler = (
    error: Error,
@@ -6,7 +6,7 @@ export const errorHandler = (
    res: Response,
    next: NextFunction
  ) => {
-    console.log("erorrrrrrrrrrrrr");
+    console.log("erorrrrrrrrrrrrr erorrrrrrrrrrrr erorrrrrrrrrrrr");
    console.error(error);
    
    res.status(500).json({ message: error.message });

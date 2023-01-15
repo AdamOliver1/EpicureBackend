@@ -7,17 +7,14 @@ import IDish from "../models/Dish";
 
 @injectable()
 export class DishHandler extends BaseHandler<IDish> implements IDishHandler {
-  // @inject(TYPES.IDishRepository) protected repository: IDishRepository;
-  protected repository: IDishRepository;
 
   constructor(
-    // @inject(TYPES.IDishRepository)
     @inject(TYPES.IDishRepository)
-    protected readonly dishRepository: IDishRepository
+    protected readonly repository: IDishRepository
   ) {
     super();
-    this.repository = dishRepository;
   }
+  
   async filterAllStrings(name: string): Promise<IDish[]> {
     return await this.repository.filterAllStrings(name);
   }

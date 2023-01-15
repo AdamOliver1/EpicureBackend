@@ -16,6 +16,7 @@ const controller = container.get<RestaurantController>(
 );
 
 RestaurantRouter.get("/", controller.getAll);
+RestaurantRouter.get("/:id", controller.getById);
 RestaurantRouter.put("/:id", controller.update);
 RestaurantRouter.put("/disable/:id", controller.Disable);
 RestaurantRouter.post("/", controller.create);

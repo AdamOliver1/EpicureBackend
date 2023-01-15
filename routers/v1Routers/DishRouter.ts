@@ -7,10 +7,10 @@ import { container } from "../../factory/inversify.config";
 
 const DishRouter = express.Router();
 
-// const controller = new DishController(new DishHandler(new DishRepository()));
 const controller = container.get<DishController>(TYPES.DishController);
 
 DishRouter.get("/", controller.getAll);
+DishRouter.get("/:id", controller.getById);
 DishRouter.put("/:id", controller.update);
 DishRouter.put("/disable/:id", controller.Disable);
 DishRouter.post("/", controller.create);

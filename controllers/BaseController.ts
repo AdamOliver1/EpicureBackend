@@ -5,7 +5,6 @@ import IModel from "../db/dbModels/IModel";
 
 @injectable()
 export default abstract class BaseController {
-  //TODO change any to types | | |
   protected abstract handler: IHandler<IModel>;
   router: Router;
 
@@ -37,6 +36,19 @@ export default abstract class BaseController {
       res.send(items);
     } catch (err: any) {
       console.log(err);
+    }
+  };
+
+  getById = async (req: Request, res: Response) => {
+    try {
+      const {id} = req.params;
+      if(id === undefined) throw new Error("Must deliver an id");
+      const item = await this.handler.findById(id);
+      res.send(item);
+    } catch (err: any) {
+      console.log("errorrrrrrrrrrrrr: " + err);
+      throw err;
+      // console.log(err);
     }
   };
 
