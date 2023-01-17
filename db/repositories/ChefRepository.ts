@@ -1,19 +1,25 @@
 import {
-  descriptionPipe as matchDescription,
+  fieldPipe,
   idPipe,
-  namePipe as matchName,
 } from "./../helpers/matchHelper";
 import { Chef } from "../dbModels/ChefModel";
 import BaseRepository from "./base/BaseRepository";
 import { injectable } from "inversify";
 import IChef from "../../models/Chef";
 import { IChefRepository } from "../Interfaces/ModelsRepositories";
+import { exists } from "../helpers/filters";
 
 @injectable()
 export class ChefRepository
   extends BaseRepository<IChef>
   implements IChefRepository
 {
+
+ async getAllExists(): Promise<IChef[]> {
+  console.log("shitttttttt");
+    return await this.model.aggregate([{ $match: exists() }]);
+  }
+
   constructor() {
     super(Chef);
   }
@@ -25,13 +31,13 @@ export class ChefRepository
   }
 
   async filterByName(name: string): Promise<IChef[]> {
-    return this.filterMultipleOptions([matchName(name)]);
+    return this.filterMultipleOptions([fieldPipe("name",name)]);
   }
 
-  async filterAllStrings(name: string): Promise<IChef[]> {
+  async filterAllStrings(text: string): Promise<IChef[]> {
     return this.filterMultipleOptions([
-      matchName(name),
-      matchDescription(name),
+      fieldPipe("name",text),
+      fieldPipe("description",text),
     ]);
   }
 }

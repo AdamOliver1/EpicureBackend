@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "strictPropertyInitialization": false,
+    "resolveJsonModule": true,
     "target": "es5",
     "lib": [
       "es6"

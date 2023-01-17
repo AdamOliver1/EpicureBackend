@@ -16,6 +16,9 @@ const dishSchema = new Schema<IDish>({
   ingredients: {
     type: [String]
   },
+  image:{
+    type: String
+  },
   tags: {
     type: [String],enum:Object.values(Tags)
   },

@@ -3,13 +3,20 @@ import 'reflect-metadata';
 import express, {Request,Response,Application} from 'express';
 import {connectToDb} from './startup/db';
 import * as dotenv from 'dotenv';
-// import  * as cors from 'cors';
+import cors from 'cors';
 import { initData } from './startup/initData';
 import { appRouter } from './routers/AppRouter';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 dotenv.config();
 const app:Application = express();
-// app.use(cors());
 
+const allowedOrigins = ['http://localhost:3000'];
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+
+app.use(cors(options));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -18,5 +25,6 @@ app.use(appRouter);
 app.use(errorHandler)
 connectToDb();
 app.listen( process.env.PORT || 8000, ():void => {
+  app.use("/swagger",swaggerUi.serve,swaggerUi.setup(swaggerDocument));
     console.log(`Server Running here`);
   }); 

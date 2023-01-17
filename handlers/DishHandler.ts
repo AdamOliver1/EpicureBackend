@@ -22,4 +22,8 @@ export class DishHandler extends BaseHandler<IDish> implements IDishHandler {
   async deletePermanently(id: string): Promise<any> {
     return await this.repository.deletePermanently(id);
   }
+  
+  async getLimitedDishes(limit:number): Promise<IDish[]> {
+    return await this.repository.getLimitedDishes(limit);
+  }
 }

@@ -10,6 +10,7 @@ const DishRouter = express.Router();
 const controller = container.get<DishController>(TYPES.DishController);
 
 DishRouter.get("/", controller.getAll);
+DishRouter.get("/limited", controller.getLimitedDishes);
 DishRouter.get("/:id", controller.getById);
 DishRouter.put("/:id", controller.update);
 DishRouter.put("/disable/:id", controller.Disable);

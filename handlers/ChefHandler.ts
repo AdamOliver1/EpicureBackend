@@ -18,6 +18,10 @@ export class ChefHandler extends BaseHandler<IChef> implements IChefHandler {
     return await this.repository.deletePermanently(id);
   }
 
+  async getChefOfTheWeek(id: string): Promise<any> {
+    return await this.repository.findById('63c56dd1641a69d6f95158ec');
+  }
+
   async filterAllStrings(name: string): Promise<IChef[]> {
     return await this.repository.filterAllStrings(name);
   }

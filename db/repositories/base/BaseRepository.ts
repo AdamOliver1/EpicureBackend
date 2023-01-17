@@ -14,8 +14,10 @@ export default abstract class BaseRepository<T extends IModel>
   constructor(@unmanaged() model: Model<T>) {
     this.model = model;
   }
+  
   abstract filterByName(name: string, populate?: string): Promise<T[]>;
   abstract findById(id: string): Promise<T[]>;
+  abstract getAllExists(): Promise<T[]> ;
 
   async create(item: T): Promise<T> {
     const newItem = this.model.create({ ...item });
@@ -36,9 +38,6 @@ export default abstract class BaseRepository<T extends IModel>
     return await this.model.findByIdAndDelete({ _id: id });
   }
 
-  async getAllExists(): Promise<T[]> {
-    return await this.model.aggregate([{ $match: exists() }]);
-  }
 
   protected async filterMultipleOptions(
     matchOptions: PipelineStage[]

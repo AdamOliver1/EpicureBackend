@@ -4,11 +4,13 @@ import IRestaurant from "../../models/Restaurant";
 import { IHandler } from "./IHandler";
 
 export interface IChefHandler extends IHandler<IChef> {
-    filterAllStrings(text: string): Promise<IChef[]>
+    filterAllStrings(text: string): Promise<IChef[]>;
+    getChefOfTheWeek(id: string): Promise<any>;
 }
 
 export interface IDishHandler extends IHandler<IDish> {
     filterAllStrings(text: string): Promise<IDish[]> ;
+    getLimitedDishes(limit:number): Promise<IDish[]>;
 }
 
 export interface IRestaurantHandler extends IHandler<IRestaurant> {}

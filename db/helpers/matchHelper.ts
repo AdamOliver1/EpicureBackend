@@ -1,28 +1,14 @@
-import mongoose, { Types } from "mongoose";
+import mongoose from "mongoose";
 
 
-export const namePipe = (name: string): any => ({
-    name: { $regex: ".*" + name + ".*", $options: "i" },
-  });
-
-  export const descriptionPipe = (name: string): any => ({
-    description: { $regex: ".*" + name + ".*", $options: "i" },
-  });
-
-  export const ingredientsPipe = (name: string): any => ({
-     ingredients: {  $elemMatch: {$regex: ".*" + name + ".*", $options: "i"} }
-  });
-
-  export const tagsPipe = (name: string): any => ({
-    ingredients: { $elemMatch: {$regex: ".*" + name + ".*", $options: "i"}  }
- });
-
-
- export const idPipe = (id: string): any => ({
-  _id: new mongoose.Types.ObjectId(id)
+export const fieldPipe = (field: string, name: string): any => ({
+  [field]: { $regex: ".*" + name + ".*", $options: "i" }, //TODO
 });
 
+export const arrayFieldPipe = (field: string, name: string): any => ({
+  [field]: { $regex: ".*" + name + ".*", $options: "i" }, //TODO
+});
 
-
-
-  
+export const idPipe = (id: string): any => ({
+  _id: new mongoose.Types.ObjectId(id),
+});
