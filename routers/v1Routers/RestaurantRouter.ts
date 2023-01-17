@@ -16,10 +16,10 @@ const controller = container.get<RestaurantController>(
 );
 
 RestaurantRouter.get("/", controller.getAll);
+RestaurantRouter.post("/", controller.create);
 RestaurantRouter.get("/:id", controller.getById);
 RestaurantRouter.put("/:id", controller.update);
 RestaurantRouter.put("/disable/:id", controller.Disable);
-RestaurantRouter.post("/", controller.create);
 RestaurantRouter.delete("/:id", controller.deletePermanently);
 
 export { RestaurantRouter };

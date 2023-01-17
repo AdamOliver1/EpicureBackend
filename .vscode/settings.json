@@ -4,6 +4,7 @@
         "inversify",
         "middlewares",
         "Shitrit",
+        "tsoa",
         "Yossi"
     ]
 }

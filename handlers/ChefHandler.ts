@@ -18,7 +18,9 @@ export class ChefHandler extends BaseHandler<IChef> implements IChefHandler {
     return await this.repository.deletePermanently(id);
   }
 
-  async getChefOfTheWeek(id: string): Promise<any> {
+  async getChefOfTheWeek(): Promise<IChef> {
+    console.log(" return await this.repository.findById('63c56dd1641a69d6f95158ec');");
+    
     return await this.repository.findById('63c56dd1641a69d6f95158ec');
   }
 

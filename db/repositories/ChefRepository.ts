@@ -16,7 +16,6 @@ export class ChefRepository
 {
 
  async getAllExists(): Promise<IChef[]> {
-  console.log("shitttttttt");
     return await this.model.aggregate([{ $match: exists() }]);
   }
 
@@ -24,9 +23,12 @@ export class ChefRepository
     super(Chef);
   }
 
-  async findById(id: string): Promise<IChef[]> {
-    const res = await this.filterMultipleOptions([idPipe(id)]);
-    if (res.length > 1) throw new Error("ID must be unique!");
+  async findById(id: string): Promise<IChef> {
+    console.log("id:     ::");
+    console.log(id);
+    
+    const res = await this.model.findById(id);
+    if(res === null) throw new Error("must not be null");
     return res;
   }
 

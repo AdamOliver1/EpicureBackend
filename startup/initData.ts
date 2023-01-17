@@ -16,7 +16,7 @@ export const initData = async () => {
   if (chefs.length == 0 && restaurant.length == 0 && dishes.length == 0) {
     const chef1 = await chefRepository.create({
       name: "Yossi Shitrit",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797545/Epicure/assets/Chef_frn3ak.svg",
+      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673957583/epicure2/Epicure_2023-01-16_11_23/chefs/untitled-1_3x_1_lyvriu.png",
       description:
         "Chef Yossi Shitrit has been living and breathing his culinary dreams for more than two decades, including running the kitchen in his first restaurant, the fondly-remembered Violet, located in Moshav  Udim. Shitrit's creativity and culinary  acumen born of long experience  are expressed in the every detail of each and every dish.",
     });

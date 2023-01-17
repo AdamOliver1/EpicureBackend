@@ -16,7 +16,7 @@ export default abstract class BaseRepository<T extends IModel>
   }
   
   abstract filterByName(name: string, populate?: string): Promise<T[]>;
-  abstract findById(id: string): Promise<T[]>;
+  abstract findById(id: string): Promise<T>;
   abstract getAllExists(): Promise<T[]> ;
 
   async create(item: T): Promise<T> {

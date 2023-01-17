@@ -15,9 +15,11 @@ export class DishRepository
     super(Dish);
   }
 
-  async findById(id: string): Promise<IDish[]> {
-    const res = await this.filterMultipleOptionsWithPopulation([idPipe(id)]);
-    if (res.length > 1) throw new Error("ID must be unique!");
+  async findById(id: string): Promise<IDish> {
+    const res = await this.model.findById(id).populate("restaurant");
+    if(res === null )throw new Error("Dish Doesn't Exist");
+    // const res = await this.filterMultipleOptionsWithPopulation([idPipe(id)]);
+    // if (res.length > 1) throw new Error("ID must be unique!");
     return res;
   }
 
@@ -28,7 +30,6 @@ export class DishRepository
 
 
   async getAllExists(): Promise<IDish[]> {
-    console.log("getAllExists");
     return await this.model.aggregate([
       { $match: exists() },
       { $lookup: this.restaurantLookup() },

@@ -12,7 +12,7 @@ export interface IWrite<T> {
 
 export interface IFilter<T> {
   filterByName(name: string, populate?: string): Promise<T[]>;
- findById(id: string): Promise<T[]>;
+ findById(id: string): Promise<T>;
 
 }
 

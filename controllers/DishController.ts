@@ -15,9 +15,6 @@ export class DishController extends BaseController {
   getLimitedDishes = async (req: Request, res: Response) => {
     try {
       const items = await this.handler.getLimitedDishes(3);
-      console.log(items);
-      console.log();
-      
       res.send(items);
     } catch (err: any) {
       console.log(err);

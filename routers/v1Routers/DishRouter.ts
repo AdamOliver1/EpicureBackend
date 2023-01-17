@@ -11,10 +11,10 @@ const controller = container.get<DishController>(TYPES.DishController);
 
 DishRouter.get("/", controller.getAll);
 DishRouter.get("/limited", controller.getLimitedDishes);
+DishRouter.post("/", controller.create);
 DishRouter.get("/:id", controller.getById);
 DishRouter.put("/:id", controller.update);
 DishRouter.put("/disable/:id", controller.Disable);
-DishRouter.post("/", controller.create);
 DishRouter.delete("/:id", controller.deletePermanently);
 
 export { DishRouter };
