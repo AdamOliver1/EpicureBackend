@@ -15,12 +15,18 @@ export class RestaurantRepository
   constructor() {
     super(Restaurant);
   }
+  async getLimited(limit: number): Promise<IRestaurant[]> {
+    return await this.model.aggregate([
+      { $match: exists() },
+      { $lookup: this.chefLookup() },
+      { $project: this.getRestaurantProps()},
+      {$limit:3}
+    ]);
+  }
 
   async findById(id: string): Promise<IRestaurant> {
     const res = await this.model.findById(id).populate('chef');
     if (res === null) throw new Error("ID must be unique!");
-    // const res = await this.filterWithPopulate([idPipe(id)]);
-    // if (res.length > 1) throw new Error("ID must be unique!");
     return res;
   }
 

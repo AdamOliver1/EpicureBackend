@@ -14,4 +14,6 @@ export interface IDishRepository extends IRepository<IDish> {
   getLimitedDishes(limit:number): Promise<IDish[]> ;
 }
 
-export interface IRestaurantRepository extends IRepository<IRestaurant> {}
+export interface IRestaurantRepository extends IRepository<IRestaurant> {
+  getLimited(limit: number): Promise<IRestaurant[]> ;
+}

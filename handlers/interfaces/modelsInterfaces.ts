@@ -13,4 +13,6 @@ export interface IDishHandler extends IHandler<IDish> {
     getLimitedDishes(limit:number): Promise<IDish[]>;
 }
 
-export interface IRestaurantHandler extends IHandler<IRestaurant> {}
+export interface IRestaurantHandler extends IHandler<IRestaurant> {
+    getLimited(limit:number): Promise<IRestaurant[]>;
+}

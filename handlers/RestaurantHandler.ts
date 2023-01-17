@@ -17,6 +17,9 @@ export class RestaurantHandler
   ) {
     super();
   }
+  async getLimited(limit: number): Promise<IRestaurant[]> {
+   return await this.repository.getLimited(3);
+  }
 
   deletePermanently(id: string): Promise<any> {
     throw new Error("Method not implemented.");
