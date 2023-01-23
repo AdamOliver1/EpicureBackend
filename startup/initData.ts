@@ -3,6 +3,7 @@ import { ChefRepository } from "../db/repositories/ChefRepository";
 import { RestaurantRepository } from "../db/repositories/RestaurantRepository";
 import { DishRepository } from "../db/repositories/DishRepository";
 import { Tags } from "../models/Tags";
+import { IsChefOfTheWeek } from "../models/ChefOfTheWeek";
 
 export const initData = async () => {
   const chefRepository = new ChefRepository();
@@ -19,14 +20,15 @@ export const initData = async () => {
       image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673957583/epicure2/Epicure_2023-01-16_11_23/chefs/untitled-1_3x_1_lyvriu.png",
       description:
         "Chef Yossi Shitrit has been living and breathing his culinary dreams for more than two decades, including running the kitchen in his first restaurant, the fondly-remembered Violet, located in Moshav  Udim. Shitrit's creativity and culinary  acumen born of long experience  are expressed in the every detail of each and every dish.",
-    });
+    isChefOfTheWeek:IsChefOfTheWeek.Yes
+      });
     const chef2 = await chefRepository.create({
       name: "Ran Shmueli",
       image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797545/Epicure/assets/Chef_frn3ak.svg",
       description:
         "Chef John is a professional Chef with over 10 years of experience",
     });
-    const chef3 = await chefRepository.create({
+    const chef3 = await chefRepository.create({ 
       name: "Meir Adoni",
       image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797545/Epicure/assets/Chef_frn3ak.svg",
       description:

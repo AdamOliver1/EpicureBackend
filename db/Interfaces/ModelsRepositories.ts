@@ -7,6 +7,7 @@ import { IRepository } from "./IRepository";
 
 export interface IChefRepository extends IRepository<IChef> {
   filterAllStrings(text: string): Promise<IChef[]>;
+  getChefOfTheWeek():Promise<IChef| null>;
 }
 
 export interface IDishRepository extends IRepository<IDish> {

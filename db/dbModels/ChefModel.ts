@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import { Status } from "../../models/status";
 import IChef from "../../models/Chef";
+import { IsChefOfTheWeek } from "../../models/ChefOfTheWeek";
 
 
 const chefSchema = new Schema<IChef>({
@@ -20,6 +21,13 @@ const chefSchema = new Schema<IChef>({
     default: Status.EXISTS,
     select:false
   },
+  isChefOfTheWeek: {
+    type: String,
+    enum: Object.values(IsChefOfTheWeek),
+    default: IsChefOfTheWeek.NotYet,
+    select:false
+  }
+ 
 
 },{ versionKey: false });
 const Chef = model<IChef>("Chef", chefSchema);

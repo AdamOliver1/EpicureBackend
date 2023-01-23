@@ -8,6 +8,7 @@ import { injectable } from "inversify";
 import IChef from "../../models/Chef";
 import { IChefRepository } from "../Interfaces/ModelsRepositories";
 import { exists } from "../helpers/filters";
+import { IsChefOfTheWeek } from "../../models/ChefOfTheWeek";
 
 @injectable()
 export class ChefRepository
@@ -22,11 +23,11 @@ export class ChefRepository
   constructor() {
     super(Chef);
   }
+  async getChefOfTheWeek(): Promise<IChef | null> {//  isChefOfTheWeek?:IsChefOfTheWeek;
+   return await this.model.findOne({isChefOfTheWeek:IsChefOfTheWeek.Yes}).exec();
+  }
 
   async findById(id: string): Promise<IChef> {
-    console.log("id:     ::");
-    console.log(id);
-    
     const res = await this.model.findById(id);
     if(res === null) throw new Error("must not be null");
     return res;

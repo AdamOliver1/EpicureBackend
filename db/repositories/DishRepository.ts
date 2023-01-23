@@ -71,6 +71,7 @@ export class DishRepository
       price: 1,
       ingredients: 1,
       tags: 1,
+      image:1,
       restaurant: {
         $cond: {
           if: { $isArray: "$restaurant" },

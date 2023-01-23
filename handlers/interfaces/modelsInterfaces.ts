@@ -5,7 +5,7 @@ import { IHandler } from "./IHandler";
 
 export interface IChefHandler extends IHandler<IChef> {
     filterAllStrings(text: string): Promise<IChef[]>;
-    getChefOfTheWeek(): Promise<any>;
+    getChefOfTheWeek(): Promise<IChef | null>;
 }
 
 export interface IDishHandler extends IHandler<IDish> {

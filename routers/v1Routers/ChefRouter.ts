@@ -9,7 +9,7 @@ const controller = container.get<ChefController>(TYPES.ChefController);
 //  * @swagger
 //  * /chef:
 //  *   get:
-//  *     summary: dsggsdgdsg
+//  *     summary: 
 //  *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
 // */
 ChefRouter.get("/", controller.getAll);

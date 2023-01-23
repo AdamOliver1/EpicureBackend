@@ -12,7 +12,8 @@ import { swaggerSpec } from './startup/swagger';
 
 dotenv.config();
 const app:Application = express();
-const allowedOrigins = ['http://localhost:3000'];
+
+const allowedOrigins = ['http://localhost:3000',"http://localhost:4200"];
 const options: cors.CorsOptions = {
   origin: allowedOrigins
 };

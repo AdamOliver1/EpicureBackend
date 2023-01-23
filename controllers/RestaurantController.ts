@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { inject, injectable } from "inversify";
 import TYPES from "../factory/types";
 import { IRestaurantHandler } from "../handlers/interfaces/modelsInterfaces";
@@ -15,12 +15,12 @@ export class RestaurantController extends BaseController {
   }
 
 
-  getLimited = async (req: Request, res: Response) => {
+  getLimited = async (req: Request, res: Response,next:NextFunction) => {
     try {
       const items = await this.handler.getLimited(3);
       res.send(items);
     } catch (err: any) {
-      console.log(err);
+      next(err)
     }
   };
   

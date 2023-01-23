@@ -13,18 +13,12 @@ export class ChefController extends BaseController {
     super();
   }
 
-  getChefOfTheWeek = async (req: Request, res: Response) => {
+  getChefOfTheWeek = async (req: Request, res: Response,next:NextFunction) => {
     try {
-      // const { id } = req.params;
-// const id = "63c56dd1641a69d6f95158ec";
-      // if (id === undefined) throw new Error("Must deliver an id");
-      console.log(" ChefController ChefController ChefController ChefController ChefController");
-      
       const item = await this.handler.getChefOfTheWeek();
       res.send(item);
     } catch (err: any) {
-      console.log(err);
-     
+      next(err)
     }
   };
 }

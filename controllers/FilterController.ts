@@ -22,8 +22,7 @@ export class FilterController {
         );
       }
     } catch (err: any) {
-   console.log(err);
-   
+      next(err)
     }
   };
 }

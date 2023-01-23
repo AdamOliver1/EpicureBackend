@@ -1,6 +1,6 @@
 import { IHandler } from "./../handlers/interfaces/IHandler";
 import { injectable } from "inversify";
-import express, { Request, Response, Router } from "express";
+import express, { NextFunction, Request, Response, Router } from "express";
 import IModel from "../models/IModel";
 
 @injectable()
@@ -13,6 +13,8 @@ export default abstract class BaseController {
   }
 
   create = async (req: Request, res: Response) => {
+    console.log("save",req.body);
+    
     try {
       const item = await this.handler.create(req.body);
       res.send(item);
@@ -39,34 +41,34 @@ export default abstract class BaseController {
     }
   };
 
-  getById = async (req: Request, res: Response) => {
+  getById = async (req: Request, res: Response,next:NextFunction) => {
     try {
       const { id } = req.params;
       if (id === undefined) throw new Error("Must deliver an id");
       const item = await this.handler.findById(id);
       res.send(item);
     } catch (err: any) {
-      console.log("errorrrrrrrrrrrrr: " + err);
-      throw err;
-      // console.log(err);
+      next(err)
     }
   };
 
-  Disable = async (req: Request, res: Response) => {
+  Disable = async (req: Request, res: Response,next:NextFunction) => {
+    console.log("Disable");
+    
     try {
       await this.handler.disable(req.params.id);
       res.send();
     } catch (err: any) {
-      console.log(err);
+      next(err)
     }
   };
 
-  deletePermanently = async (req: Request, res: Response) => {
+  deletePermanently = async (req: Request, res: Response,next:NextFunction) => {
     try {
       await this.handler.deletePermanently(req.params.id);
       res.send();
     } catch (err: any) {
-      console.log(err);
+      next(err)
     }
   };
 }

@@ -6,18 +6,18 @@ export const errorHandler = (
    res: Response,
    next: NextFunction
  ) => {
-    console.log("erorrrrrrrrrrrrr erorrrrrrrrrrrr erorrrrrrrrrrrr");
+    console.log("error middleware: ");
    console.error(error);
    
    res.status(500).json({ message: error.message });
  };
 
-// process.on('uncaughtException', (ex) => {
-//    console.log("uncaughtException");
+process.on('uncaughtException', (ex) => {
+   console.log("uncaughtException");
    
-// })
+})
 
-// process.on('unhandledRejection', (ex) => {
-//    console.log("unhandledRejection");
+process.on('unhandledRejection', (ex) => {
+   console.log("unhandledRejection");
    
-// })
+})
