@@ -4,16 +4,26 @@ import { RestaurantRepository } from "../db/repositories/RestaurantRepository";
 import { DishRepository } from "../db/repositories/DishRepository";
 import { Tags } from "../models/Tags";
 import { IsChefOfTheWeek } from "../models/ChefOfTheWeek";
+import { UserRepository } from "../db/repositories/UserRepository";
 
 export const initData = async () => {
   const chefRepository = new ChefRepository();
   const restaurantRepository = new RestaurantRepository();
   const dishRepository = new DishRepository();
+  const userRepository = new UserRepository();
 
   const chefs = await chefRepository.getAllExists();
   const restaurant = await restaurantRepository.getAllExists();
   const dishes = await dishRepository.getAllExists();
-
+  const users = await userRepository.getAllExists();
+  
+if(users.length === 0){
+  const user = await userRepository.create({
+    name:"adam",
+    password:"12345",
+    
+  })
+}
   if (chefs.length == 0 && restaurant.length == 0 && dishes.length == 0) {
     const chef1 = await chefRepository.create({
       name: "Yossi Shitrit",
@@ -24,7 +34,7 @@ export const initData = async () => {
       });
     const chef2 = await chefRepository.create({
       name: "Ran Shmueli",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797545/Epicure/assets/Chef_frn3ak.svg",
+      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673957294/epicure2/Epicure_2023-01-16_11_23/chefs/shahaf-shabtay-image_tgj42h_bwz2sq.png",
       description:
         "Chef John is a professional Chef with over 10 years of experience",
     });
@@ -36,7 +46,7 @@ export const initData = async () => {
     });
     const chef4 = await chefRepository.create({
       name: "Yanir Green",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797545/Epicure/assets/Chef_frn3ak.svg",
+      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673957293/epicure2/Epicure_2023-01-16_11_23/chefs/yuval-ben-neriah-image_inubuc_smm9ti.png",
       description:
         "Chef Sarah is a professional Chef with over 20 years of experience",
     });

@@ -27,6 +27,17 @@ export class ChefRepository
    return await this.model.findOne({isChefOfTheWeek:IsChefOfTheWeek.Yes}).exec();
   }
 
+async updateChefOfTheWeek(id:string): Promise<IChef | null> {//  isChefOfTheWeek?:IsChefOfTheWeek;
+   const oldChef = await this.model.findOne({isChefOfTheWeek:IsChefOfTheWeek.Yes}).exec();
+   if(oldChef){
+     this.update(oldChef?._id,{isChefOfTheWeek:IsChefOfTheWeek.WasAlready} as IChef);
+   }
+   const newChef = await this.model.findById(id).exec();
+   if(!newChef) throw new Error("Invalid Chef ID");
+   this.update(id,{isChefOfTheWeek:IsChefOfTheWeek.Yes} as IChef)
+   return newChef;
+  }
+
   async findById(id: string): Promise<IChef> {
     const res = await this.model.findById(id);
     if(res === null) throw new Error("must not be null");

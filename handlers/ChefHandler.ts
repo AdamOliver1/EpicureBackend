@@ -13,10 +13,15 @@ export class ChefHandler extends BaseHandler<IChef> implements IChefHandler {
   ) {
     super();
   }
+  updateChefOfTheWeek(id: string): Promise<IChef | null> {
+  return this.repository.updateChefOfTheWeek(id);
+  }
 
   async deletePermanently(id: string): Promise<any> {
     return await this.repository.deletePermanently(id);
   }
+
+
 
   async getChefOfTheWeek(): Promise<IChef | null> {
     return await this.repository.getChefOfTheWeek();

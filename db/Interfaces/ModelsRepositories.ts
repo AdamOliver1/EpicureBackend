@@ -4,10 +4,12 @@ import IDish from "../../models/Dish";
 import IRestaurant from "../../models/Restaurant";
 import IModel from "../../models/IModel";
 import { IRepository } from "./IRepository";
+import IUser from "../../models/User";
 
 export interface IChefRepository extends IRepository<IChef> {
   filterAllStrings(text: string): Promise<IChef[]>;
   getChefOfTheWeek():Promise<IChef| null>;
+  updateChefOfTheWeek(id:string): Promise<IChef | null>;
 }
 
 export interface IDishRepository extends IRepository<IDish> {
@@ -17,4 +19,8 @@ export interface IDishRepository extends IRepository<IDish> {
 
 export interface IRestaurantRepository extends IRepository<IRestaurant> {
   getLimited(limit: number): Promise<IRestaurant[]> ;
+}
+
+
+export interface IUserRepository extends IRepository<IUser> {
 }

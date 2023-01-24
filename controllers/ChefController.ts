@@ -21,4 +21,13 @@ export class ChefController extends BaseController {
       next(err)
     }
   };
+
+  updateChefOfTheWeek = async (req: Request, res: Response,next:NextFunction) => {
+    try {
+      const item = await this.handler.updateChefOfTheWeek(req.params.id);
+      res.send(item);
+    } catch (err: any) {
+      next(err)
+    }
+  };
 }

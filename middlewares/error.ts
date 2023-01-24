@@ -18,6 +18,8 @@ process.on('uncaughtException', (ex) => {
 })
 
 process.on('unhandledRejection', (ex) => {
+  console.log(ex);
+  
    console.log("unhandledRejection");
    
 })
