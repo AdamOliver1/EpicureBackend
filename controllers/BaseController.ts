@@ -12,7 +12,7 @@ export default abstract class BaseController {
 
   create = async (req: Request, res: Response) => {
 
-console.log("ceate");
+console.log(" create = async (req: Request, res: Response) => {");
     // try {
       const item = await this.handler.create(req.body);
       res.send(item);

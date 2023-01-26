@@ -3,8 +3,9 @@ import express from "express";
 import TYPES from "../../factory/types";
 import { container } from "../../factory/inversify.config";
 import { authUpdater } from "../../middlewares/auth/observerAuth";
+import { validator } from "../../middlewares/validator";
 import { authCRUD } from "../../middlewares/auth/operatorAuth";
-
+import {loginSchema,dishSchema,chefSchema,restaurantSchema } from "../../helpers/validationHelper";
 const ChefRouter = express.Router();
 const controller = container.get<ChefController>(TYPES.ChefController);
 // /**
@@ -21,7 +22,7 @@ ChefRouter.get("/:id", controller.getById);
 ChefRouter.put("/:id", authUpdater, controller.update);
 ChefRouter.put("/chefweek/:id", authUpdater, controller.updateChefOfTheWeek);
 ChefRouter.put("/disable/:id",  [authUpdater, authCRUD], controller.Disable);
-ChefRouter.post("/", [authUpdater, authCRUD], controller.create);
+ChefRouter.post("/", [validator(chefSchema),authUpdater, authCRUD], controller.create);
 ChefRouter.delete("/:id",[authUpdater, authCRUD],controller.deletePermanently);
 
 export { ChefRouter };

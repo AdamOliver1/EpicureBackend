@@ -25,10 +25,10 @@ import { DishHandler } from "../handlers/DishHandler";
 import { FilterController } from "../controllers/FilterController";
 import { ICrossFilteringHandle } from "../handlers/interfaces/ICrossFilteringHandle";
 import { CrossFilteringHandle } from "../handlers/CrossFilteringHandle";
-import { UserRepository } from "../db/repositories/UserRepository";
 import { UserHandler } from "../handlers/UserHandler";
-import {AuthController} from "../controllers/authController";
 import { AuthHandler } from "../handlers/authHandler";
+import { UserRepository } from "../db/repositories/UserRepository";
+import { AuthController } from "../controllers/authController";
 
 
 const container = new Container();

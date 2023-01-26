@@ -15,12 +15,11 @@ export class AuthController {
     @inject(TYPES.IUserHandler) protected readonly userHandler: IUserHandler
   ) {}
 
-  Login = async (req: Request, res: Response, next: NextFunction) => {
+  Login = async (req: Request, res: Response) => {
       const { user, token } = await this.authHandler.VerifyLogin(
         req.body.username,
         req.body.password
       );
-     
       res.send({ user, token });
   };
 }

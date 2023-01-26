@@ -30,7 +30,7 @@ class ErrorHandler {
   private _handleTrustedError(error: AppError, response: Response): void {
     console.log("_handleTrustedError");
 
-    response.status(error.httpCode).json({ message: error.message });
+    response.status(error.httpCode).json({ message: error.message,errors:error?.args?.errors });
   }
 
   private _handleCriticalError(
