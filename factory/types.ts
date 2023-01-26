@@ -12,7 +12,9 @@ const TYPES = {
     IRestaurantHandler:Symbol.for("IRestaurantHandler"),
     ICrossFilteringHandle:Symbol.for("ICrossFilteringHandle"),
     IUserHandler:Symbol.for("IUserHandler"),
+    IAuthHandler:Symbol.for("IAuthHandler"),
     
+
     ChefController:Symbol.for("ChefController"),
     DishController:Symbol.for("DishController"),
     RestaurantController:Symbol.for("RestaurantController"),

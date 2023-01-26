@@ -6,21 +6,19 @@ import IModel from "../models/IModel";
 @injectable()
 export default abstract class BaseController {
   protected abstract handler: IHandler<IModel>;
-  router: Router;
 
   constructor() {
-    this.router = express.Router();
   }
 
   create = async (req: Request, res: Response) => {
-    console.log("save",req.body);
-    
-    try {
+
+console.log("ceate");
+    // try {
       const item = await this.handler.create(req.body);
       res.send(item);
-    } catch (err: any) {
-      console.log(err);
-    }
+    // } catch (err: any) {
+      // console.log(err);
+    // }
   };
 
   update = async (req: Request, res: Response) => {

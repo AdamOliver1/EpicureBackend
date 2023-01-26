@@ -5,6 +5,7 @@ import { DishRepository } from "../db/repositories/DishRepository";
 import { Tags } from "../models/Tags";
 import { IsChefOfTheWeek } from "../models/ChefOfTheWeek";
 import { UserRepository } from "../db/repositories/UserRepository";
+import { ROLE } from "../models/Role";
 
 export const initData = async () => {
   const chefRepository = new ChefRepository();
@@ -16,69 +17,75 @@ export const initData = async () => {
   const restaurant = await restaurantRepository.getAllExists();
   const dishes = await dishRepository.getAllExists();
   const users = await userRepository.getAllExists();
-  
-if(users.length === 0){
-  const user = await userRepository.create({
-    name:"adam",
-    password:"12345",
-    
-  })
-}
+
+  if (users.length === 0) {
+    await userRepository.createUser("adam", "12345");
+    await userRepository.createUser("kenneth", "12345", ROLE.CRUD);
+  }
   if (chefs.length == 0 && restaurant.length == 0 && dishes.length == 0) {
     const chef1 = await chefRepository.create({
       name: "Yossi Shitrit",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673957583/epicure2/Epicure_2023-01-16_11_23/chefs/untitled-1_3x_1_lyvriu.png",
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673957583/epicure2/Epicure_2023-01-16_11_23/chefs/untitled-1_3x_1_lyvriu.png",
       description:
         "Chef Yossi Shitrit has been living and breathing his culinary dreams for more than two decades, including running the kitchen in his first restaurant, the fondly-remembered Violet, located in Moshav  Udim. Shitrit's creativity and culinary  acumen born of long experience  are expressed in the every detail of each and every dish.",
-    isChefOfTheWeek:IsChefOfTheWeek.Yes
-      });
+      isChefOfTheWeek: IsChefOfTheWeek.Yes,
+    });
     const chef2 = await chefRepository.create({
       name: "Ran Shmueli",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673957294/epicure2/Epicure_2023-01-16_11_23/chefs/shahaf-shabtay-image_tgj42h_bwz2sq.png",
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673957294/epicure2/Epicure_2023-01-16_11_23/chefs/shahaf-shabtay-image_tgj42h_bwz2sq.png",
       description:
         "Chef John is a professional Chef with over 10 years of experience",
     });
-    const chef3 = await chefRepository.create({ 
+    const chef3 = await chefRepository.create({
       name: "Meir Adoni",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797545/Epicure/assets/Chef_frn3ak.svg",
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797545/Epicure/assets/Chef_frn3ak.svg",
       description:
         "Chef Sarah is a professional Chef with over 20 years of experience",
     });
     const chef4 = await chefRepository.create({
       name: "Yanir Green",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673957293/epicure2/Epicure_2023-01-16_11_23/chefs/yuval-ben-neriah-image_inubuc_smm9ti.png",
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673957293/epicure2/Epicure_2023-01-16_11_23/chefs/yuval-ben-neriah-image_inubuc_smm9ti.png",
       description:
         "Chef Sarah is a professional Chef with over 20 years of experience",
     });
 
     const restaurant1 = await restaurantRepository.create({
       name: "Onza",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797546/Epicure/assets/onza_hzajew.svg",
-      stars:4 ,
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797546/Epicure/assets/onza_hzajew.svg",
+      stars: 4,
       chef: chef1,
     });
     const restaurant2 = await restaurantRepository.create({
       name: "Kitchen Market",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797547/Epicure/assets/kitchenMarket_tyo9qe.svg",
-      stars:4,
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797547/Epicure/assets/kitchenMarket_tyo9qe.svg",
+      stars: 4,
       chef: chef2,
     });
     const restaurant3 = await restaurantRepository.create({
       name: "Mashya",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797547/Epicure/assets/mashya_fpydw6.svg",
-      stars:5,
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797547/Epicure/assets/mashya_fpydw6.svg",
+      stars: 5,
       chef: chef3,
     });
     const restaurant4 = await restaurantRepository.create({
       name: "Claro",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797549/Epicure/assets/dishes/claro_ntawtt.svg",
-      stars:5,
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797549/Epicure/assets/dishes/claro_ntawtt.svg",
+      stars: 5,
       chef: chef2,
     });
     const restaurant5 = await restaurantRepository.create({
       name: "Lumina",
-      image: "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797546/Epicure/assets/dishes/lumina_qblhpr.svg",
-      stars:4,
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797546/Epicure/assets/dishes/lumina_qblhpr.svg",
+      stars: 4,
       chef: chef3,
     });
 
@@ -88,7 +95,8 @@ if(users.length === 0){
       ingredients: ["chicken", "tomatoes", "onions"],
       tags: [Tags.SPICY, Tags.VEGAN],
       restaurant: restaurant1,
-      image:"https://res.cloudinary.com/do7fhccn2/image/upload/v1673797549/Epicure/assets/dishes/padKiMao_p2hrrb.svg"
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797549/Epicure/assets/dishes/padKiMao_p2hrrb.svg",
     });
     const dish2 = await dishRepository.create({
       name: "Garbanzo Frito",
@@ -96,7 +104,8 @@ if(users.length === 0){
       ingredients: ["beef", "potatoes", "carrots"],
       tags: [],
       restaurant: restaurant2,
-      image:"https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/garbanzoFrito_alquka.svg"
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/garbanzoFrito_alquka.svg",
     });
     const dish3 = await dishRepository.create({
       name: "Smoked Pizza",
@@ -104,7 +113,8 @@ if(users.length === 0){
       ingredients: ["shrimp", "zucchini", "mushrooms"],
       tags: [Tags.SPICY],
       restaurant: restaurant3,
-      image:"https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg"
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg",
     });
     const dish4 = await dishRepository.create({
       name: "John's Favorite",
@@ -112,8 +122,8 @@ if(users.length === 0){
       ingredients: ["pork", "eggplant", "peppers"],
       tags: [Tags.VEGETARIAN],
       restaurant: restaurant4,
-      image:"https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg"
-
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg",
     });
     const dish5 = await dishRepository.create({
       name: "Michael's Creation",
@@ -121,8 +131,8 @@ if(users.length === 0){
       ingredients: ["salmon", "spinach", "onions"],
       tags: [Tags.VEGETARIAN],
       restaurant: restaurant5,
-      image:"https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg"
-
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg",
     });
 
     const dish7 = await dishRepository.create({
@@ -131,8 +141,8 @@ if(users.length === 0){
       ingredients: ["lamb", "squash", "tomatoes"],
       tags: [Tags.VEGETARIAN],
       restaurant: restaurant4,
-      image:"https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg"
-
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg",
     });
     const dish8 = await dishRepository.create({
       name: "Michael's Masterpiece",
@@ -140,8 +150,8 @@ if(users.length === 0){
       ingredients: ["scallops", "leeks", "asparagus"],
       tags: [],
       restaurant: restaurant2,
-      image:"https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg"
-
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg",
     });
     const dish9 = await dishRepository.create({
       name: "Sarah's Sensation",
@@ -149,8 +159,8 @@ if(users.length === 0){
       ingredients: ["mussels", "cauliflower", "potatoes"],
       tags: [],
       restaurant: restaurant1,
-      image:"https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg"
-
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg",
     });
     const dish10 = await dishRepository.create({
       name: "John's Delicacy",
@@ -158,8 +168,8 @@ if(users.length === 0){
       ingredients: ["clams", "cabbage", "onions"],
       tags: [Tags.SPICY],
       restaurant: restaurant1,
-      image:"https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg"
-
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg",
     });
     const dish11 = await dishRepository.create({
       name: "Michael's Classic",
@@ -167,8 +177,8 @@ if(users.length === 0){
       ingredients: ["oysters", "radicchio", "fennel"],
       tags: [Tags.SPICY],
       restaurant: restaurant1,
-      image:"https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg"
-
+      image:
+        "https://res.cloudinary.com/do7fhccn2/image/upload/v1673797550/Epicure/assets/dishes/smokedPizza_hnl5yp.svg",
     });
   }
 };

@@ -1,9 +1,9 @@
 import { injectable, unmanaged } from "inversify";
 import { Model, PipelineStage } from "mongoose";
-import { IRepository } from "../../Interfaces/IRepository";
-import { Status } from "../../../models/status";
-import IModel from "../../../models/IModel";
-import { disabled, exists } from "../../helpers/filters";
+import { IRepository } from "../Interfaces/IRepository";
+import { Status } from "../../models/status";
+import IModel from "../../models/IModel";
+import { disabled, exists } from "../helpers/filters";
 
 @injectable()
 export default abstract class BaseRepository<T extends IModel>
@@ -14,10 +14,10 @@ export default abstract class BaseRepository<T extends IModel>
   constructor(@unmanaged() model: Model<T>) {
     this.model = model;
   }
-  
+
   abstract filterByName(name: string, populate?: string): Promise<T[]>;
   abstract findById(id: string): Promise<T>;
-  abstract getAllExists(): Promise<T[]> ;
+  abstract getAllExists(): Promise<T[]>;
 
   async create(item: T): Promise<T> {
     const newItem = this.model.create({ ...item });
@@ -37,7 +37,6 @@ export default abstract class BaseRepository<T extends IModel>
   async deletePermanently(id: string): Promise<any> {
     return await this.model.findByIdAndDelete({ _id: id });
   }
-
 
   protected async filterMultipleOptions(
     matchOptions: PipelineStage[]

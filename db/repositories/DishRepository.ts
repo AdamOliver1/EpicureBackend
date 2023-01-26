@@ -1,6 +1,6 @@
 import { exists } from "./../helpers/filters";
 import { arrayFieldPipe, fieldPipe, idPipe } from "./../helpers/matchHelper";
-import BaseRepository from "./base/BaseRepository";
+import BaseRepository from "./BaseRepository";
 import { Dish } from "../dbModels/DishModel";
 import { injectable } from "inversify";
 import IDish from "../../models/Dish";
@@ -17,23 +17,21 @@ export class DishRepository
 
   async findById(id: string): Promise<IDish> {
     const res = await this.model.findById(id).populate("restaurant");
-    if(res === null )throw new Error("Dish Doesn't Exist");
+    if (res === null) throw new Error("Dish Doesn't Exist");
     // const res = await this.filterMultipleOptionsWithPopulation([idPipe(id)]);
     // if (res.length > 1) throw new Error("ID must be unique!");
     return res;
   }
 
-
-  async getLimitedDishes(limit:number): Promise<IDish[]> {
+  async getLimitedDishes(limit: number): Promise<IDish[]> {
     return this.model.find().limit(limit);
   }
-
 
   async getAllExists(): Promise<IDish[]> {
     return await this.model.aggregate([
       { $match: exists() },
       { $lookup: this.restaurantLookup() },
-      { $project: this.getDishProps() }
+      { $project: this.getDishProps() },
     ]);
   }
 
@@ -71,7 +69,7 @@ export class DishRepository
       price: 1,
       ingredients: 1,
       tags: 1,
-      image:1,
+      image: 1,
       restaurant: {
         $cond: {
           if: { $isArray: "$restaurant" },
@@ -82,7 +80,7 @@ export class DishRepository
     };
   }
 
-  private restaurantLookup(){
+  private restaurantLookup() {
     return {
       from: "restaurants",
       localField: "restaurant",

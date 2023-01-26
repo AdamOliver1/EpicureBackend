@@ -23,4 +23,6 @@ export interface IRestaurantRepository extends IRepository<IRestaurant> {
 
 
 export interface IUserRepository extends IRepository<IUser> {
+  findOne(compare:{}): Promise<IUser | null> ;
+  createUser(username:string,password:string): Promise<IUser>;
 }

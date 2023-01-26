@@ -1,25 +1,24 @@
-import{ NextFunction, Request, Response } from "express";
+import "express-async-errors";
+import { NextFunction, Request, Response } from "express";
+import { errorHandler } from "../Error/errorHandler";
 
-export const errorHandler = (
-   error: Error,
-   req: Request,
-   res: Response,
-   next: NextFunction
- ) => {
-    console.log("error middleware: ");
-   console.error(error);
-   
-   res.status(500).json({ message: error.message });
- };
+export const error = (
+  error: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log("error middleware: ");
+  errorHandler.handleError(error,res);
 
-process.on('uncaughtException', (ex) => {
-   console.log("uncaughtException");
-   
-})
+};
 
-process.on('unhandledRejection', (ex) => {
-  console.log(ex);
-  
-   console.log("unhandledRejection");
-   
-})
+process.on("uncaughtException", (ex) => {
+  console.log("uncaughtException");
+  errorHandler.handleError(ex)
+});
+
+process.on("unhandledRejection", (ex) => {
+  errorHandler.handleError(ex as Error)
+  console.log("unhandledRejection");
+});

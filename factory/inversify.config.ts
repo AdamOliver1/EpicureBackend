@@ -4,6 +4,7 @@ import { DishController } from "./../controllers/DishController";
 import { ChefController } from "./../controllers/ChefController";
 import { RestaurantHandler } from "./../handlers/RestaurantHandler";
 import {
+  IAuthHandler,
   IDishHandler,
   IRestaurantHandler,
   IUserHandler,
@@ -27,6 +28,7 @@ import { CrossFilteringHandle } from "../handlers/CrossFilteringHandle";
 import { UserRepository } from "../db/repositories/UserRepository";
 import { UserHandler } from "../handlers/UserHandler";
 import {AuthController} from "../controllers/authController";
+import { AuthHandler } from "../handlers/authHandler";
 
 
 const container = new Container();
@@ -69,6 +71,10 @@ container
   container
   .bind<IUserHandler>(TYPES.IUserHandler)
   .to(UserHandler)
+  .inSingletonScope();
+  container//
+  .bind<IAuthHandler>(TYPES.IAuthHandler)
+  .to(AuthHandler)
   .inSingletonScope();
 
 // controllers
