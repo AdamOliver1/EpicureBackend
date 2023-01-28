@@ -12,24 +12,23 @@ import {
 import { Container } from "inversify";
 import { ChefHandler } from "../handlers/ChefHandler";
 import { IChefHandler } from "../handlers/interfaces/modelsInterfaces";
-import { ChefRepository } from "../db/repositories/ChefRepository";
+import { ChefRepository } from "../DAL/repositories/ChefRepository";
 import {
   IChefRepository,
   IDishRepository,
   IRestaurantRepository,
   IUserRepository,
-} from "../db/Interfaces/ModelsRepositories";
-import { DishRepository } from "../db/repositories/DishRepository";
-import { RestaurantRepository } from "../db/repositories/RestaurantRepository";
+} from "../DAL/Interfaces/ModelsRepositories";
+import { DishRepository } from "../DAL/repositories/DishRepository";
+import { RestaurantRepository } from "../DAL/repositories/RestaurantRepository";
 import { DishHandler } from "../handlers/DishHandler";
 import { FilterController } from "../controllers/FilterController";
 import { ICrossFilteringHandle } from "../handlers/interfaces/ICrossFilteringHandle";
 import { CrossFilteringHandle } from "../handlers/CrossFilteringHandle";
 import { UserHandler } from "../handlers/UserHandler";
 import { AuthHandler } from "../handlers/authHandler";
-import { UserRepository } from "../db/repositories/UserRepository";
+import { UserRepository } from "../DAL/repositories/UserRepository";
 import { AuthController } from "../controllers/authController";
-
 
 const container = new Container();
 //TODO change names and check nest js
@@ -68,11 +67,11 @@ container
   .bind<ICrossFilteringHandle>(TYPES.ICrossFilteringHandle)
   .to(CrossFilteringHandle)
   .inSingletonScope();
-  container
+container
   .bind<IUserHandler>(TYPES.IUserHandler)
   .to(UserHandler)
   .inSingletonScope();
-  container//
+container //
   .bind<IAuthHandler>(TYPES.IAuthHandler)
   .to(AuthHandler)
   .inSingletonScope();

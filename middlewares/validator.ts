@@ -7,11 +7,14 @@ import { HttpCode } from '../Error/httpCode';
 
 export const validator = (schema: ObjectSchema) => {
   return async  (req: Request,res: Response, next: NextFunction) => {
+    console.log(req.body);
     
     const result = schema.validate(req.body,{ abortEarly: false });
+    console.log(result.error);
+    
     const msgs = result.error?.details.map(err => {
       return {
-        message:err.message.replace('/',"").replace('"',"")
+        message:err.message.replace('"', '').replace('" '," ")
       }
     });
     console.log(msgs);

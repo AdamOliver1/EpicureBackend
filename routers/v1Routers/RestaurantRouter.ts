@@ -1,12 +1,11 @@
-import { RestaurantHandler } from "../../handlers/RestaurantHandler";
-import express, { Request, Response, Application } from "express";
+import express, {  } from "express";
 import { RestaurantController } from "../../controllers/RestaurantController";
-import { RestaurantRepository } from "../../db/repositories/RestaurantRepository";
 import { container } from "../../factory/inversify.config";
-import { DishController } from "../../controllers/DishController";
 import TYPES from "../../factory/types";
+import { restaurantSchema } from "../../helpers/validationHelper";
 import { authUpdater } from "../../middlewares/auth/observerAuth";
 import { authCRUD } from "../../middlewares/auth/operatorAuth";
+import { validator } from "../../middlewares/validator";
 
 const RestaurantRouter = express.Router();
 
@@ -14,16 +13,23 @@ const controller = container.get<RestaurantController>(
   TYPES.RestaurantController
 );
 
+//#region  NON ADMIN
 RestaurantRouter.get("/", controller.getAll);
 RestaurantRouter.get("/limited", controller.getLimited);
+RestaurantRouter.get("/by-chef/:id", controller.getByChef);
 RestaurantRouter.get("/:id", controller.getById);
-RestaurantRouter.put("/:id", authUpdater, controller.update);
-RestaurantRouter.put("/disable/:id",  [authUpdater, authCRUD], controller.Disable);
-RestaurantRouter.post("/", [authUpdater, authCRUD], controller.create);
-RestaurantRouter.delete(
-  "/:id",
-  [authUpdater, authCRUD],
-  controller.deletePermanently
-);
+//#endregion
+
+//#region ADMIN UPDATER
+RestaurantRouter.use(authUpdater);
+RestaurantRouter.put("/:id",validator(restaurantSchema),controller.update);
+//#endregion
+
+//#region ADMIN CRUD
+RestaurantRouter.use(authCRUD);
+RestaurantRouter.put("/disable/:id", controller.Disable);
+RestaurantRouter.post("/",validator(restaurantSchema), controller.create);
+RestaurantRouter.delete("/:id",controller.deletePermanently);
+//#endregion
 
 export { RestaurantRouter };

@@ -1,5 +1,5 @@
 import { BaseHandler } from "./BaseHandler";
-import { IChefRepository } from "../db/Interfaces/ModelsRepositories";
+import { IChefRepository } from "../DAL/Interfaces/ModelsRepositories";
 import { IChefHandler } from "./interfaces/modelsInterfaces";
 import { inject, injectable } from "inversify";
 import TYPES from "../factory/types";
@@ -14,14 +14,12 @@ export class ChefHandler extends BaseHandler<IChef> implements IChefHandler {
     super();
   }
   updateChefOfTheWeek(id: string): Promise<IChef | null> {
-  return this.repository.updateChefOfTheWeek(id);
+    return this.repository.updateChefOfTheWeek(id);
   }
 
   async deletePermanently(id: string): Promise<any> {
     return await this.repository.deletePermanently(id);
   }
-
-
 
   async getChefOfTheWeek(): Promise<IChef | null> {
     return await this.repository.getChefOfTheWeek();

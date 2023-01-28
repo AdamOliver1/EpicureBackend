@@ -1,4 +1,4 @@
-import { exists } from "./../helpers/filters";
+import { exists } from "../helpers/filters";
 import BaseRepository from "./BaseRepository";
 import { injectable } from "inversify";
 import { Status } from "../../models/status";
@@ -24,10 +24,12 @@ export class RestaurantRepository
     ]);
   }
 
-  async findById(id: string): Promise<IRestaurant> {
-    const res = await this.model.findById(id).populate("chef");
-    if (res === null) throw new Error("ID must be unique!");
-    return res;
+  async getByChef(chefId:string): Promise<IRestaurant[]> {
+    return await this.model.find({chef:chefId,status:Status.EXISTS}).populate('chef').exec();
+  }
+
+  async findById(id: string): Promise<IRestaurant | null> {
+    return await this.model.findById(id).populate("chef");
   }
 
   async getAllExists(): Promise<IRestaurant[]> {

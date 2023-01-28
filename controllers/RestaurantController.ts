@@ -13,15 +13,19 @@ export class RestaurantController extends BaseController {
   ) {
     super();
   }
-
+  
+  getByChef = async (req: Request, res: Response,next:NextFunction) => {
+   
+      const items = await this.handler.getByChef(req.params.id);
+      res.send(items);
+   
+  };
 
   getLimited = async (req: Request, res: Response,next:NextFunction) => {
-    try {
+   
       const items = await this.handler.getLimited(3);
       res.send(items);
-    } catch (err: any) {
-      next(err)
-    }
+   
   };
   
 }

@@ -1,13 +1,19 @@
-import { IRepository } from "../db/Interfaces/IRepository";
+import { AppError } from './../Error/appError';
+import { IRepository } from "../DAL/Interfaces/IRepository";
 import { IHandler } from "./interfaces/IHandler";
 import { injectable } from "inversify";
 import IModel from "../models/IModel";
+import { HttpCode } from '../Error/httpCode';
 
 @injectable()
 export abstract class BaseHandler<T extends IModel> implements IHandler<T> {
-  
   async findById(id: string): Promise<T> {
-    return await this.repository.findById(id);
+    const res = await this.repository.findById(id);
+    if(!res) throw new AppError({
+      description:"There is no much",
+      httpCode:HttpCode.NOT_FOUND_404
+    })
+    return res;
   }
 
   protected abstract repository: IRepository<T>;

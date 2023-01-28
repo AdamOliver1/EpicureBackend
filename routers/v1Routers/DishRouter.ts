@@ -1,4 +1,4 @@
-import { DishRepository } from "../../db/repositories/DishRepository";
+import { DishRepository } from "../../DAL/repositories/DishRepository";
 import { DishHandler } from "./../../handlers/DishHandler";
 import { DishController } from "./../../controllers/DishController";
 import express from "express";
@@ -6,6 +6,8 @@ import TYPES from "../../factory/types";
 import { container } from "../../factory/inversify.config";
 import { authUpdater } from "../../middlewares/auth/observerAuth";
 import { authCRUD } from "../../middlewares/auth/operatorAuth";
+import { validator } from "../../middlewares/validator";
+import { dishSchema } from "../../helpers/validationHelper";
 
 const DishRouter = express.Router();
 
@@ -18,16 +20,16 @@ DishRouter.get("/:id", controller.getById);
 //#endregion
 
 //#region Admin
-DishRouter.put("/:id", authUpdater, controller.update);
-DishRouter.put("/disable/:id",  [authUpdater, authCRUD], controller.Disable);
-DishRouter.post("/", controller.create);
-// DishRouter.post("/", [authUpdater, authCRUD], controller.create);
+DishRouter.use(authUpdater)
+DishRouter.put("/:id",validator(dishSchema), controller.update);
 //#endregion
 
-DishRouter.delete(
-  "/:id",
-  [authUpdater, authCRUD],
-  controller.deletePermanently
-);
+//#region Admin CRUD
+DishRouter.use(authCRUD)
+DishRouter.put("/disable/:id", controller.Disable);
+DishRouter.post("/",validator(dishSchema), controller.create);
+DishRouter.delete("/:id",controller.deletePermanently);
+//#endregion
+
 
 export { DishRouter };

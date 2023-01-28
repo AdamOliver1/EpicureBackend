@@ -16,13 +16,22 @@ const controller = container.get<ChefController>(TYPES.ChefController);
 //  *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
 // */
 
+//#region NON ADMIN
 ChefRouter.get("/", controller.getAll);
 ChefRouter.get("/chefweek", controller.getChefOfTheWeek);
 ChefRouter.get("/:id", controller.getById);
-ChefRouter.put("/:id", authUpdater, controller.update);
-ChefRouter.put("/chefweek/:id", authUpdater, controller.updateChefOfTheWeek);
-ChefRouter.put("/disable/:id",  [authUpdater, authCRUD], controller.Disable);
-ChefRouter.post("/", [validator(chefSchema),authUpdater, authCRUD], controller.create);
-ChefRouter.delete("/:id",[authUpdater, authCRUD],controller.deletePermanently);
+//#endregion
 
+//#region ADMIN UPDATER
+ChefRouter.use(authUpdater);
+ChefRouter.put("/:id",validator(chefSchema), controller.update);
+ChefRouter.put("/chefweek/:id",controller.updateChefOfTheWeek);
+//#endregion
+
+//#region ADMIN CRUD
+ChefRouter.use(authCRUD);
+ChefRouter.put("/disable/:id", controller.Disable);
+ChefRouter.post("/", validator(chefSchema), controller.create);
+ChefRouter.delete("/:id",controller.deletePermanently);
+//#endregion
 export { ChefRouter };

@@ -1,4 +1,5 @@
-import { fieldPipe, idPipe } from "./../helpers/matchHelper";
+import { AppError } from "./../../Error/appError";
+import { fieldPipe, idPipe } from "../helpers/matchHelper";
 import { Chef } from "../dbModels/ChefModel";
 import BaseRepository from "./BaseRepository";
 import { injectable } from "inversify";
@@ -6,6 +7,7 @@ import IChef from "../../models/Chef";
 import { IChefRepository } from "../Interfaces/ModelsRepositories";
 import { exists } from "../helpers/filters";
 import { IsChefOfTheWeek } from "../../models/ChefOfTheWeek";
+import { HttpCode } from "../../Error/httpCode";
 
 @injectable()
 export class ChefRepository
@@ -37,15 +39,17 @@ export class ChefRepository
       } as IChef);
     }
     const newChef = await this.model.findById(id).exec();
-    if (!newChef) throw new Error("Invalid Chef ID");
+    if (!newChef)
+      throw new AppError({
+        description: "Invalid Chef ID",
+        httpCode: HttpCode.NOT_FOUND_404,
+      });
     this.update(id, { isChefOfTheWeek: IsChefOfTheWeek.Yes } as IChef);
     return newChef;
   }
 
-  async findById(id: string): Promise<IChef> {
-    const res = await this.model.findById(id);
-    if (res === null) throw new Error("must not be null");
-    return res;
+  async findById(id: string): Promise<IChef | null> {
+    return await this.model.findById(id);
   }
 
   async filterByName(name: string): Promise<IChef[]> {

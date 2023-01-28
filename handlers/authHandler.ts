@@ -1,6 +1,6 @@
 import { ROLE } from "../models/Role";
 import { inject, injectable } from "inversify";
-import { IUserRepository } from "../db/Interfaces/ModelsRepositories";
+import { IUserRepository } from "../DAL/Interfaces/ModelsRepositories";
 import TYPES from "../factory/types";
 import IUser from "../models/User";
 import { IAuthHandler, IUserHandler } from "./interfaces/modelsInterfaces";
@@ -20,7 +20,10 @@ export class AuthHandler implements IAuthHandler {
     protected readonly repository: IUserRepository
   ) {}
 
-  async VerifyLogin( username: string, password: string): Promise<VerifiedToken> {
+  async VerifyLogin(
+    username: string,
+    password: string
+  ): Promise<VerifiedToken> {
     const foundUser = await this.repository.findOne({ name: username });
 
     if (!foundUser)

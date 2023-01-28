@@ -25,12 +25,12 @@ export class UserRepository
     return newItem;
   }
 
-  filterByName(name: string, populate?: string): Promise<IUser[]> {
+  filterByName(name: string): Promise<IUser[]> {
     return this.filterMultipleOptions([fieldPipe("name", name)]);
   }
 
-  findById(id: string): Promise<IUser> {
-    throw new Error("Not implemented");
+  async findById(id: string): Promise<IUser | null> {
+   return await this.model.findById(id);
   }
   async findOne(compare: {}): Promise<IUser | null> {
     return await this.model.findOne(compare);

@@ -1,10 +1,10 @@
 import { Status } from "./../models/status";
-import { ChefRepository } from "../db/repositories/ChefRepository";
-import { RestaurantRepository } from "../db/repositories/RestaurantRepository";
-import { DishRepository } from "../db/repositories/DishRepository";
+import { ChefRepository } from "../DAL/repositories/ChefRepository";
+import { RestaurantRepository } from "../DAL/repositories/RestaurantRepository";
+import { DishRepository } from "../DAL/repositories/DishRepository";
 import { Tags } from "../models/Tags";
 import { IsChefOfTheWeek } from "../models/ChefOfTheWeek";
-import { UserRepository } from "../db/repositories/UserRepository";
+import { UserRepository } from "../DAL/repositories/UserRepository";
 import { ROLE } from "../models/Role";
 
 export const initData = async () => {

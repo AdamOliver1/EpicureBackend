@@ -16,6 +16,7 @@ export interface IDishHandler extends IHandler<IDish> {
 }
 
 export interface IRestaurantHandler extends IHandler<IRestaurant> {
+  getByChef(chefId:string): Promise<IRestaurant[]>;
   getLimited(limit: number): Promise<IRestaurant[]>;
 }
 

@@ -13,12 +13,10 @@ export class DishController extends BaseController {
   }
 
   getLimitedDishes = async (req: Request, res: Response,next:NextFunction) => {
-    try {
+  
       const items = await this.handler.getLimitedDishes(3);
       res.send(items);
-    } catch (err: any) {
-      next(err)
-    }
+  
   };
 
   

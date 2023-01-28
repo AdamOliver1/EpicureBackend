@@ -1,5 +1,5 @@
-import { exists } from "./../helpers/filters";
-import { arrayFieldPipe, fieldPipe, idPipe } from "./../helpers/matchHelper";
+import { exists } from "../helpers/filters";
+import { arrayFieldPipe, fieldPipe, idPipe } from "../helpers/matchHelper";
 import BaseRepository from "./BaseRepository";
 import { Dish } from "../dbModels/DishModel";
 import { injectable } from "inversify";
@@ -15,12 +15,8 @@ export class DishRepository
     super(Dish);
   }
 
-  async findById(id: string): Promise<IDish> {
-    const res = await this.model.findById(id).populate("restaurant");
-    if (res === null) throw new Error("Dish Doesn't Exist");
-    // const res = await this.filterMultipleOptionsWithPopulation([idPipe(id)]);
-    // if (res.length > 1) throw new Error("ID must be unique!");
-    return res;
+  async findById(id: string): Promise<IDish | null> {
+    return await this.model.findById(id).populate("restaurant");
   }
 
   async getLimitedDishes(limit: number): Promise<IDish[]> {

@@ -18,6 +18,7 @@ export interface IDishRepository extends IRepository<IDish> {
 }
 
 export interface IRestaurantRepository extends IRepository<IRestaurant> {
+  getByChef(chefId:string): Promise<IRestaurant[]>;
   getLimited(limit: number): Promise<IRestaurant[]> ;
 }
 

@@ -14,12 +14,10 @@ export class ChefController extends BaseController {
   }
 
   getChefOfTheWeek = async (req: Request, res: Response,next:NextFunction) => {
-    try {
+  
       const item = await this.handler.getChefOfTheWeek();
       res.send(item);
-    } catch (err: any) {
-      next(err)
-    }
+  
   };
 
   updateChefOfTheWeek = async (req: Request, res: Response,next:NextFunction) => {
