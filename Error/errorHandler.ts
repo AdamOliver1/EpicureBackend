@@ -39,12 +39,14 @@ class ErrorHandler {
   ): void {
     console.log("_handleCriticalError");
     if (response) {
+      console.log("throwing 500 error status");
       response
         .status(HttpCode.INTERNAL_SERVER_ERROR_500)
         .json({ message: "Internal server error" });
     }
 
     console.log("Application encountered a critical error. Exiting");
+    // response?.status(500).json({message:error?.message})
     // process.exit(1);
   }
 }

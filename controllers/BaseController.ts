@@ -19,6 +19,7 @@ export default abstract class BaseController {
   };
 
   getAll = async (req: Request, res: Response) => {
+    throw new Error("all errror")
     const items = await this.handler.getAll();
     res.send(items);
   };
