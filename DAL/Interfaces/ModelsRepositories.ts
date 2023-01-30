@@ -15,6 +15,7 @@ export interface IChefRepository extends IRepository<IChef> {
 export interface IDishRepository extends IRepository<IDish> {
   filterAllStrings(text: string): Promise<IDish[]>;
   getLimitedDishes(limit:number): Promise<IDish[]> ;
+  getDishesByRestaurant(restaurantId: string): Promise<IDish[]>
 }
 
 export interface IRestaurantRepository extends IRepository<IRestaurant> {

@@ -42,6 +42,10 @@ export class DishRepository
       arrayFieldPipe("tags", text),
     ]);
   }
+  async getDishesByRestaurant(restaurantId: string): Promise<IDish[]> {
+return await this.model.find({restaurant:restaurantId})
+
+  }
 
   private async filterMultipleOptionsWithPopulation(
     options: {}[]

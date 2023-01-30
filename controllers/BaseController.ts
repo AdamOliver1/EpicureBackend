@@ -31,6 +31,8 @@ export default abstract class BaseController {
   };
 
   Disable = async (req: Request, res: Response) => {
+    console.log("disable base");
+
     await this.handler.disable(req.params.id);
     res.send();
   };

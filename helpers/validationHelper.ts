@@ -10,7 +10,7 @@ const numberRequired = Joi.number().required();
 });
 
  const dishSchema = Joi.object({
-    _id:Joi.string(),
+    _id:Joi.allow(),
     price: numberRequired,
     ingredients: Joi.array().items(Joi.string().min(2)).required(),
     image: stringRequired,
@@ -21,14 +21,14 @@ const numberRequired = Joi.number().required();
 });
 
  const chefSchema = Joi.object({
-    _id:Joi.string(),
+    _id:Joi.allow(),
     name: stringRequired.label("name"),
     image: stringRequired,
     description: stringRequired,  
 });
 
  const restaurantSchema = Joi.object({
-    _id:Joi.string(),
+    _id:Joi.allow(),
     name: stringRequired,
     image: stringRequired,
     stars: numberRequired.min(1).max(5),
