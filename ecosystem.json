@@ -12,14 +12,14 @@
 	],
 	"deploy": {
 		"production": {
-			"key": "~/Documents/keys-aws/epicure-key.pem",
+			"key": "~/.ssh/epicure-key.pem",
 			"user": "ubuntu",
 
 
-			"host": ["http://ec2-18-182-30-33.ap-northeast-1.compute.amazonaws.com"],
+			"host": ["ec2-18-182-30-33.ap-northeast-1.compute.amazonaws.com"],
 
 
-			"ref": "origin/develop",
+			"ref": "origin/main",
 
 
 			"repo": "git@github.com:adammoveo/EpicureBackend.git",
