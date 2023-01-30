@@ -8,13 +8,13 @@ import { authCRUD } from "../../middlewares/auth/operatorAuth";
 import {loginSchema,dishSchema,chefSchema,restaurantSchema } from "../../helpers/validationHelper";
 const ChefRouter = express.Router();
 const controller = container.get<ChefController>(TYPES.ChefController);
-// /**
-//  * @swagger
-//  * /chef:
-//  *   get:
-//  *     summary:
-//  *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
-// */
+/**
+ * @swagger
+ * /chef:
+ *   get:
+ *     summary:
+ *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
+*/
 
 //#region NON ADMIN
 ChefRouter.get("/", controller.getAll);
