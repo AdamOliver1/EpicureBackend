@@ -25,7 +25,7 @@
 			"repo": "git@github.com:adammoveo/EpicureBackend.git",
 
 
-			"path": "/home/ubuntu/epicure-server",
+			"path": "/home/ubuntu/EpicureBackend",
 
 
 			"ssh_options": "StrictHostKeyChecking=no",
