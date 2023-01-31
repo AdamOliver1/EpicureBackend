@@ -4,7 +4,7 @@
 			"name": "EpicureBackend",
 			"script": "./index.ts --interpreter /home/ubuntu/.nvm/versions/node/v16.19.0/bin/ts-node  --watch --name node-server",
 			"interpreter": "./node_modules/.bin/ts-node",
-			"exec_interpreter": "node",
+			"exec_interpreter": "ts-node",
 			"exec_mode": "fork_mode",
 			"env": {
 				"NODE_ENV": "production"
