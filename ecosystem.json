@@ -2,7 +2,7 @@
     "apps": [
 		{
 			"name": "EpicureBackend",
-			"script": "pm2 start index.ts --watch -i max",
+			"script": "ts-node-dev --respawn ./index.ts",
 			"interpreter": "./node_modules/.bin/ts-node",
 			"exec_interpreter": "node",
 			"exec_mode": "fork_mode",
