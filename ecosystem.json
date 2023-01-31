@@ -3,7 +3,6 @@
 		{
 			"name": "EpicureBackend",
 			"script": "./index.ts",
-			"cwd": "/var/www/EpicureBackend",
 			"exec_interpreter": "node",
 			"exec_mode": "fork_mode",
 			"env": {
