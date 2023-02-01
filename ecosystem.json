@@ -31,7 +31,7 @@
 			"ssh_options": "StrictHostKeyChecking=no",
 
 
-			"post-deploy": "mkdir -p logs && npm i && pm2 reload ecosystem.json --env production && tsc && pm2 start dist/index.js && pm2 save",
+			"post-deploy": "mkdir -p logs && npm i && pm2 reload ecosystem.json --env production && tsc",
 
 
 			"pre-deploy-local": "echo 'Deploying code to servers'",
