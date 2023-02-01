@@ -3,7 +3,7 @@
 		{
 			"name": "EpicureBackend",
 			"script": "/usr/local/lib/node_modules/pm2/node_modules/.bin/ts-node",
-            "args":"-r ../node_modules/tsconfig-paths/register ./start.ts",
+            "args":"-r ../node_modules/tsconfig-paths/register ./index.ts",
 			"env": {
 				"NODE_ENV": "production"
 			}
