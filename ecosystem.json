@@ -29,7 +29,7 @@
 			"ssh_options": "StrictHostKeyChecking=no",
 
 
-			"post-deploy": "mkdir -p logs && npm i && pm2 reload ecosystem.json --env production",
+			"post-deploy": "pm2 start ./src/server.ts --interpreter /usr/local/bin/ts-node --watch --name node-server",
 
 
 			"pre-deploy-local": "echo 'Deploying code to servers'",
