@@ -2,8 +2,8 @@
     "apps": [
 		{
 			"name": "EpicureBackend",
-			"script": "/usr/local/lib/node_modules/pm2/node_modules/.bin/ts-node",
-            "args":"-r ../node_modules/tsconfig-paths/register ./index.ts",
+			"script":"./dist/index.ts",
+		
 			"env": {
 				"NODE_ENV": "production"
 			}
@@ -31,7 +31,7 @@
 			"ssh_options": "StrictHostKeyChecking=no",
 
 
-			"post-deploy": "mkdir -p logs && npm i && pm2 reload ecosystem.json --env production",
+			"post-deploy": "mkdir -p logs && npm i && pm2 reload ecosystem.json --env production && tsc && pm2 start dist/index.js && pm2 save",
 
 
 			"pre-deploy-local": "echo 'Deploying code to servers'",
