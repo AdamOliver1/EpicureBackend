@@ -3,6 +3,8 @@
 		{
 			"name": "EpicureBackend",
 			"script":"pm2 start ./index.ts --interpreter /home/ubuntu/.nvm/versions/node/v16.19.0/bin/ts-node  --watch --name node-server",
+			"experimentalDecorators": true,
+			"emitDecoratorMetadata": true,
 			"env": {
 				"NODE_ENV": "production"
 			}
