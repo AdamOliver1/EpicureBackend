@@ -2,15 +2,15 @@
     "apps": [
 		{
 			"name": "EpicureBackend",
-			"script":"pm2 start ./index.ts --interpreter /home/ubuntu/.nvm/versions/node/v16.19.0/bin/ts-node  --watch --name node-server",
-			"experimentalDecorators": true,
-			"emitDecoratorMetadata": true,
+			"script": "/usr/local/lib/node_modules/pm2/node_modules/.bin/ts-node",
+            "args":"-r ../node_modules/tsconfig-paths/register ./start.ts",
 			"env": {
 				"NODE_ENV": "production"
 			}
 		}
 	],
 	"deploy": {
+		
 		"production": {
 			"key": "~/.ssh/epicure-key.pem",
 			"user": "ubuntu",
