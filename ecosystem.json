@@ -2,7 +2,7 @@
     "apps": [
 		{
 			"name": "EpicureBackend",
-			"script":" ./node_modules/.bin/ts-node index.ts",
+			"script":"pm2 start ./index.ts --interpreter /home/ubuntu/.nvm/versions/node/v16.19.0/bin/ts-node  --watch --name node-server",
 			"env": {
 				"NODE_ENV": "production"
 			}
