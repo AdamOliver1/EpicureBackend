@@ -29,16 +29,3 @@
     "./**/*.ts"
   ]
 }
-
-// {
-//   "compilerOptions": {
-//     "module": "commonjs",
-//     "esModuleInterop": true,
-//     "target": "es6",
-//     "outDir": "./dist",
-//     "sourceMap": true
-//   },
-//   "include": [
-//     "./src/*/.ts"
-//   ]
-// }

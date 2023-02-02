@@ -1,6 +1,6 @@
 import { error } from "./middlewares/error";
 import "reflect-metadata";
-import express, { Request, Response, Application } from "express";
+import express, { Application } from "express";
 import { connectToDb } from "./startup/db";
 import * as dotenv from "dotenv";
 import cors from "cors";
