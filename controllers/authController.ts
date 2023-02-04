@@ -20,10 +20,9 @@ interface IUserController {
 @injectable()
 export class AuthController implements IUserController {
   constructor(
-    @inject(TYPES.IAuthHandler) protected readonly authHandler: IAuthHandler,
-    @inject(TYPES.IUserHandler) protected readonly userHandler: IUserHandler,
-    @inject(TYPES.ICognitoUserPoolHelper)
-    protected readonly cognitoUserPoolHelper: ICognitoUserPoolHelper
+    // @inject(TYPES.IAuthHandler) protected readonly authHandler: IAuthHandler,
+    // @inject(TYPES.IUserHandler) protected readonly userHandler: IUserHandler,
+    @inject(TYPES.ICognitoUserPoolHelper) protected readonly cognitoUserPoolHelper: ICognitoUserPoolHelper
   ) {}
 
   

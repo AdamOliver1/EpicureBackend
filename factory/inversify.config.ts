@@ -4,10 +4,10 @@ import { DishController } from "./../controllers/DishController";
 import { ChefController } from "./../controllers/ChefController";
 import { RestaurantHandler } from "./../handlers/RestaurantHandler";
 import {
-  IAuthHandler,
+  // IAuthHandler,
   IDishHandler,
   IRestaurantHandler,
-  IUserHandler,
+  // IUserHandler,
 } from "./../handlers/interfaces/modelsInterfaces";
 import { Container } from "inversify";
 import { ChefHandler } from "../handlers/ChefHandler";
@@ -25,8 +25,8 @@ import { DishHandler } from "../handlers/DishHandler";
 import { FilterController } from "../controllers/FilterController";
 import { ICrossFilteringHandle } from "../handlers/interfaces/ICrossFilteringHandle";
 import { CrossFilteringHandle } from "../handlers/CrossFilteringHandle";
-import { UserHandler } from "../handlers/UserHandler";
-import { AuthHandler } from "../handlers/authHandler";
+// import { UserHandler } from "../handlers/UserHandler";
+// import { AuthHandler } from "../handlers/authHandler";
 import { UserRepository } from "../DAL/repositories/UserRepository";
 import { AuthController } from "../controllers/authController";
 import { ICognitoUserPoolHelper } from "../handlers/interfaces/ICognitoUserPoolHelper";
@@ -69,14 +69,14 @@ container
   .bind<ICrossFilteringHandle>(TYPES.ICrossFilteringHandle)
   .to(CrossFilteringHandle)
   .inSingletonScope();
-container
-  .bind<IUserHandler>(TYPES.IUserHandler)
-  .to(UserHandler)
-  .inSingletonScope();
-container //
-  .bind<IAuthHandler>(TYPES.IAuthHandler)
-  .to(AuthHandler)
-  .inSingletonScope();
+// container
+//   .bind<IUserHandler>(TYPES.IUserHandler)
+//   .to(UserHandler)
+//   .inSingletonScope();
+// container //
+//   .bind<IAuthHandler>(TYPES.IAuthHandler)
+//   .to(AuthHandler)
+//   .inSingletonScope();
   container //
   .bind<ICognitoUserPoolHelper>(TYPES.ICognitoUserPoolHelper)
   .to(CognitoUserPoolHelper)
