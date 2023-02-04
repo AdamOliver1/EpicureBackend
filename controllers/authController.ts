@@ -1,7 +1,7 @@
-import {
-  IAuthHandler,
-  IUserHandler,
-} from "../handlers/interfaces/modelsInterfaces";
+// import {
+//   IAuthHandler,
+//   IUserHandler,
+// } from "../handlers/interfaces/modelsInterfaces";
 import { Handler, Request, Response } from "express";
 import { inject, injectable } from "inversify";
 import TYPES from "../factory/types";

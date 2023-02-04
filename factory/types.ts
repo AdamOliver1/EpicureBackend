@@ -11,8 +11,8 @@ const TYPES = {
     IDishHandler:Symbol.for("IDishHandler"),
     IRestaurantHandler:Symbol.for("IRestaurantHandler"),
     ICrossFilteringHandle:Symbol.for("ICrossFilteringHandle"),
-    IUserHandler:Symbol.for("IUserHandler"),
-    IAuthHandler:Symbol.for("IAuthHandler"),
+    // IUserHandler:Symbol.for("IUserHandler"),
+    // IAuthHandler:Symbol.for("IAuthHandler"),
     ICognitoUserPoolHelper:Symbol.for("ICognitoUserPoolHelper"),
     
 
