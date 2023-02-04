@@ -14,12 +14,12 @@ export default abstract class BaseController {
   };
 
   update = async (req: Request, res: Response) => {
+        // throw new Error("all errror")
     const item = await this.handler.update(req.params.id, req.body);
     res.send(item);
   };
 
   getAll = async (req: Request, res: Response) => {
-    // throw new Error("all errror")
     const items = await this.handler.getAll();
     res.send(items);
   };
@@ -31,8 +31,6 @@ export default abstract class BaseController {
   };
 
   Disable = async (req: Request, res: Response) => {
-    console.log("disable base");
-
     await this.handler.disable(req.params.id);
     res.send();
   };

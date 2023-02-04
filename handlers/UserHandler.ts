@@ -9,7 +9,7 @@ import { IUserHandler } from "./interfaces/modelsInterfaces";
 export class UserHandler extends BaseHandler<IUser> implements IUserHandler {
   constructor(
     @inject(TYPES.IUserRepository)
-    protected readonly repository: IUserRepository
+    protected readonly restaurantRepository: IUserRepository
   ) {
     super();
   }

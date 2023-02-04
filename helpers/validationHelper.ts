@@ -11,6 +11,9 @@ const numberRequired = Joi.number().required();
 
  const dishSchema = Joi.object({
     _id:Joi.allow(),
+    vegetarian:Joi.allow(),
+    spicy:Joi.allow(),
+    vegan:Joi.allow(),
     price: numberRequired,
     ingredients: Joi.array().items(Joi.string().min(2)).required(),
     image: stringRequired,

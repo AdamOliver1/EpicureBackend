@@ -9,23 +9,23 @@ import IChef from "../models/Chef";
 export class ChefHandler extends BaseHandler<IChef> implements IChefHandler {
   constructor(
     @inject(TYPES.IChefRepository)
-    protected readonly repository: IChefRepository
+    protected readonly restaurantRepository: IChefRepository
   ) {
     super();
   }
   updateChefOfTheWeek(id: string): Promise<IChef | null> {
-    return this.repository.updateChefOfTheWeek(id);
+    return this.restaurantRepository.updateChefOfTheWeek(id);
   }
 
   async deletePermanently(id: string): Promise<any> {
-    return await this.repository.deletePermanently(id);
+    return await this.restaurantRepository.deletePermanently(id);
   }
 
   async getChefOfTheWeek(): Promise<IChef | null> {
-    return await this.repository.getChefOfTheWeek();
+    return await this.restaurantRepository.getChefOfTheWeek();
   }
 
   async filterAllStrings(name: string): Promise<IChef[]> {
-    return await this.repository.filterAllStrings(name);
+    return await this.restaurantRepository.filterAllStrings(name);
   }
 }
