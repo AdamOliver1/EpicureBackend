@@ -1,9 +1,9 @@
-import express, {  } from "express";
+import express from "express";
 import { RestaurantController } from "../../controllers/RestaurantController";
 import { container } from "../../factory/inversify.config";
 import TYPES from "../../factory/types";
 import { restaurantSchema } from "../../helpers/validationHelper";
-import { authUpdater } from "../../middlewares/auth/observerAuth";
+import { authUpdater } from "../../middlewares/auth/updaterAuth";
 import { authCRUD } from "../../middlewares/auth/operatorAuth";
 import { validator } from "../../middlewares/validator";
 
@@ -22,14 +22,14 @@ RestaurantRouter.get("/:id", controller.getById);
 
 //#region ADMIN UPDATER
 RestaurantRouter.use(authUpdater);
-RestaurantRouter.put("/:id",validator(restaurantSchema),controller.update);
+RestaurantRouter.put("/:id", validator(restaurantSchema), controller.update);
 //#endregion
 
 //#region ADMIN CRUD
 RestaurantRouter.use(authCRUD);
 RestaurantRouter.put("/disable/:id", controller.Disable);
-RestaurantRouter.post("/",validator(restaurantSchema), controller.create);
-RestaurantRouter.delete("/:id",controller.deletePermanently);
+RestaurantRouter.post("/", validator(restaurantSchema), controller.create);
+RestaurantRouter.delete("/:id", controller.deletePermanently);
 //#endregion
 
 export { RestaurantRouter };

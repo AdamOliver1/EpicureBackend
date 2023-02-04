@@ -5,7 +5,7 @@ const stringRequired = Joi.string().required();
 const numberRequired = Joi.number().required();
 
  const loginSchema = Joi.object({
-    username: stringRequired.alphanum().min(3).max(30),
+     username: stringRequired.alphanum().min(3).max(30),
     password: stringRequired.min(5).max(30).lowercase().uppercase()
 });
 

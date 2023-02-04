@@ -29,6 +29,8 @@ import { UserHandler } from "../handlers/UserHandler";
 import { AuthHandler } from "../handlers/authHandler";
 import { UserRepository } from "../DAL/repositories/UserRepository";
 import { AuthController } from "../controllers/authController";
+import { ICognitoUserPoolHelper } from "../handlers/interfaces/ICognitoUserPoolHelper";
+import { CognitoUserPoolHelper } from "../handlers/cognitoUserPoolHandler";
 
 const container = new Container();
 //TODO change names and check nest js
@@ -75,7 +77,11 @@ container //
   .bind<IAuthHandler>(TYPES.IAuthHandler)
   .to(AuthHandler)
   .inSingletonScope();
-
+  container //
+  .bind<ICognitoUserPoolHelper>(TYPES.ICognitoUserPoolHelper)
+  .to(CognitoUserPoolHelper)
+  .inSingletonScope();
+  
 // controllers
 container.bind<ChefController>(TYPES.ChefController).to(ChefController);
 container.bind<DishController>(TYPES.DishController).to(DishController);

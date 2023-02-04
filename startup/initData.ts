@@ -1,4 +1,4 @@
-import { Status } from "./../models/status";
+import { STATUS } from "./../models/status";
 import { ChefRepository } from "../DAL/repositories/ChefRepository";
 import { RestaurantRepository } from "../DAL/repositories/RestaurantRepository";
 import { DishRepository } from "../DAL/repositories/DishRepository";

@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { Status } from "../../models/status";
+import { STATUS } from "../../models/status";
 import IUser from "../../models/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -23,8 +23,8 @@ const userSchema = new Schema<IUser>(
     },
     status: {
       type: String,
-      enum: Object.values(Status),
-      default: Status.EXISTS,
+      enum: Object.values(STATUS),
+      default: STATUS.EXISTS,
       select: false,
     },
   },

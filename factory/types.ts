@@ -13,6 +13,7 @@ const TYPES = {
     ICrossFilteringHandle:Symbol.for("ICrossFilteringHandle"),
     IUserHandler:Symbol.for("IUserHandler"),
     IAuthHandler:Symbol.for("IAuthHandler"),
+    ICognitoUserPoolHelper:Symbol.for("ICognitoUserPoolHelper"),
     
 
     ChefController:Symbol.for("ChefController"),

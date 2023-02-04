@@ -1,7 +1,7 @@
 import { exists } from "../helpers/filters";
 import BaseRepository from "./BaseRepository";
 import { injectable } from "inversify";
-import { Status } from "../../models/status";
+import { STATUS } from "../../models/status";
 import IRestaurant from "../../models/Restaurant";
 import { Restaurant } from "../dbModels/RestaurantModel";
 import { fieldPipe, idPipe } from "../helpers/matchHelper";
@@ -24,8 +24,11 @@ export class RestaurantRepository
     ]);
   }
 
-  async getByChef(chefId:string): Promise<IRestaurant[]> {
-    return await this.model.find({chef:chefId,status:Status.EXISTS}).populate('chef').exec();
+  async getByChef(chefId: string): Promise<IRestaurant[]> {
+    return await this.model
+      .find({ chef: chefId, status: STATUS.EXISTS })
+      .populate("chef")
+      .exec();
   }
 
   async findById(id: string): Promise<IRestaurant | null> {

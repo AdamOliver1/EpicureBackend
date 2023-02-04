@@ -1,10 +1,9 @@
-import { Status } from "./status";
+import { STATUS } from "./status";
 
 type IModel = {
   _id?: string;
   name: string;
-  status?: Status;
-  
+  status?: STATUS;
 };
 
 export default IModel;

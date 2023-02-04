@@ -1,4 +1,4 @@
-export enum Status {
+export enum STATUS {
   EXISTS = "Exists",
   DISABLED = "disabled",
 }

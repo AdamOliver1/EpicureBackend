@@ -4,7 +4,7 @@ import { DishController } from "./../../controllers/DishController";
 import express from "express";
 import TYPES from "../../factory/types";
 import { container } from "../../factory/inversify.config";
-import { authUpdater } from "../../middlewares/auth/observerAuth";
+import { authUpdater } from "../../middlewares/auth/updaterAuth";
 import { authCRUD } from "../../middlewares/auth/operatorAuth";
 import { validator } from "../../middlewares/validator";
 import { dishSchema } from "../../helpers/validationHelper";
@@ -20,16 +20,15 @@ DishRouter.get("/:id", controller.getById);
 //#endregion
 
 //#region Admin
-DishRouter.use(authUpdater)
-DishRouter.put("/:id",validator(dishSchema), controller.update);
+DishRouter.use(authUpdater);
+DishRouter.put("/:id", validator(dishSchema), controller.update);
 //#endregion
 
 //#region Admin CRUD
-DishRouter.use(authCRUD)
+DishRouter.use(authCRUD);
 DishRouter.put("/disable/:id", controller.Disable);
-DishRouter.post("/",validator(dishSchema), controller.create);
-DishRouter.delete("/:id",controller.deletePermanently);
+DishRouter.post("/", validator(dishSchema), controller.create);
+DishRouter.delete("/:id", controller.deletePermanently);
 //#endregion
-
 
 export { DishRouter };

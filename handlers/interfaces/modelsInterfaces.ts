@@ -25,3 +25,4 @@ export interface IUserHandler extends IHandler<IUser> {}
 export interface IAuthHandler {
     VerifyLogin(username: string, password: string): Promise<{user:IUser,token:string}>
 }
+
