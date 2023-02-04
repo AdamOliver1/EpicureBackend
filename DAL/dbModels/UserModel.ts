@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose";
 import { STATUS } from "../../models/status";
 import IUser from "../../models/User";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+// import bcrypt from "bcrypt";
+// import jwt from "jsonwebtoken";
 import { ROLE } from "../../models/Role";
 const userSchema = new Schema<IUser>(
   {
@@ -34,18 +34,18 @@ const userSchema = new Schema<IUser>(
 userSchema.pre("save", async function (next) {
   const user = this;
   if (user && user.isModified("password")) {
-    user.password = await bcrypt.hash(user.password, 10);
+    // user.password = await bcrypt.hash(user.password, 10);
   }
   next();
 });
 
-userSchema.methods.generateAuthToken = function (): string {
-  return jwt.sign(
-    { _id: this._id, role: this.role },
-    process.env.JWTPRIVATEKEY as string,
-    { expiresIn: "2d" }
-  );
-};
+// userSchema.methods.generateAuthToken = function (): string {
+  // return jwt.sign(
+  //   { _id: this._id, role: this.role },
+  //   process.env.JWTPRIVATEKEY as string,
+  //   { expiresIn: "2d" }
+  // );
+// };
 
 const User = model<IUser>("User", userSchema);
 
