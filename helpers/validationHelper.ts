@@ -5,21 +5,20 @@ const stringRequired = Joi.string().required();
 const numberRequired = Joi.number().required();
 
  const loginSchema = Joi.object({
-    username: stringRequired.alphanum().min(3).max(30),
+     username: stringRequired.alphanum().min(3).max(30),
     password: stringRequired.min(5).max(30).lowercase().uppercase()
 });
 
  const dishSchema = Joi.object({
     _id:Joi.allow(),
+    vegetarian:Joi.allow(),
+    spicy:Joi.allow(),
+    vegan:Joi.allow(),
     price: numberRequired,
     ingredients: Joi.array().items(Joi.string().min(2)).required(),
     image: stringRequired,
     name: stringRequired,
     tags:Joi.array(),
-    spicy:Joi.array(),
-    vegan:Joi.array(),
-    vegetarian:Joi.array(),
-    
     restaurant:Joi.allow(),
     
 });
