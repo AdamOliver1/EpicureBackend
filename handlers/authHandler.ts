@@ -10,7 +10,7 @@ import { AppError } from "../Error/appError";
 
 export type VerifiedToken = {
   user: IUser;
-  token: string;
+  accessToken: string;
 };
 
 @injectable()
@@ -40,7 +40,7 @@ export class AuthHandler implements IAuthHandler {
 
     return {
       user: foundUser,
-      token: foundUser.generateAuthToken(),
+      accessToken: foundUser.generateAuthToken(),
     };
   }
 }

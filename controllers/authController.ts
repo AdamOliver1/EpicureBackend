@@ -16,10 +16,10 @@ export class AuthController {
   ) {}
 
   Login = async (req: Request, res: Response) => {
-      const { user, token } = await this.authHandler.VerifyLogin(
+      const { user, accessToken } = await this.authHandler.VerifyLogin(
         req.body.username,
         req.body.password
       );
-      res.send({ user, token });
+      res.send({ user, accessToken });
   };
 }
